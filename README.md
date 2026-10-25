@@ -55,13 +55,15 @@ yambda-autofe/
 ├── README.md
 ├── requirements.txt
 ├── .gitignore
-│
+├──tlab_report.pdf
+|
 ├── notebooks/
 │   ├── 01_baseline_and_feature_pool.ipynb
 │   ├── 02_feature_search_and_graph.ipynb
 │   ├── 03_extended_experiments.ipynb
 │   ├── 04_negative_candidates.ipynb
-│   └── 05_autofe_search.ipynb
+│   ├── 05_autofe_search.ipynb
+|   |├──06_final_evaluation.ipynb
 │
 ├── results/
 │   ├── baseline_full_log.txt
