@@ -1,0 +1,1257 @@
+=== последовательная модель: контексты и проверка утечки ===
+контексты построены и проверены на отсутствие утечки: группы train/sel/rep = 35268 8039 8213 | форма контекста: (35268, 64, 20)
+=== последовательная модель: контексты и проверка утечки: готово за 4 с ===
+
+=== последовательная модель: обучение ===
+устройство: cuda | эпох: 5 | d_model: 64
+модель 1/2: обучение на пользователях другой половины
+/tmp/ipykernel_49/3823825307.py:74: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:836.)
+  tot += float(loss); nb += 1
+  эпоха 1/5: loss 0.5873 | sel NDCG@10 0.6761 | 7 с
+  эпоха 2/5: loss 0.5734 | sel NDCG@10 0.6756 | 6 с
+  эпоха 3/5: loss 0.5713 | sel NDCG@10 0.6768 | 6 с
+  эпоха 4/5: loss 0.5695 | sel NDCG@10 0.6766 | 6 с
+  эпоха 5/5: loss 0.5694 | sel NDCG@10 0.6784 | 6 с
+модель 2/2: обучение на пользователях другой половины
+  эпоха 1/5: loss 0.5874 | sel NDCG@10 0.6770 | 6 с
+  эпоха 2/5: loss 0.5758 | sel NDCG@10 0.6778 | 6 с
+  эпоха 3/5: loss 0.5778 | sel NDCG@10 0.6773 | 6 с
+  эпоха 4/5: loss 0.5752 | sel NDCG@10 0.6764 | 6 с
+  эпоха 5/5: loss 0.5731 | sel NDCG@10 0.6780 | 6 с
+=== последовательная модель: обучение: готово за 74 с ===
+
+=== последовательная модель: стекинг ===
+последовательная модель отдельно: NDCG@10 rep = 0.7112 (случайный 0.6950; M1 0.7792; M2 0.7864)
+[LightGBM START] fit | features=27 | rounds=300
+[LightGBM DONE] fit | best_iter=84 | sel=0.7559 | rep=0.7801
+M1: со стекингом 0.7801 против 0.7792; Δ = +0.0009 [-0.0003; +0.0021]
+[LightGBM START] fit | features=26 | rounds=300
+[LightGBM DONE] fit | best_iter=69 | sel=0.7678 | rep=0.7875
+[LightGBM START] fit | features=27 | rounds=300
+[LightGBM DONE] fit | best_iter=163 | sel=0.7691 | rep=0.7876
+RFE_26: со стекингом 0.7876 против 0.7875; Δ = +0.0001 [-0.0011; +0.0012]
+[LightGBM START] fit | features=48 | rounds=300
+[LightGBM DONE] fit | best_iter=183 | sel=0.7698 | rep=0.7888
+[LightGBM START] fit | features=49 | rounds=300
+[LightGBM DONE] fit | best_iter=145 | sel=0.7695 | rep=0.7885
+RFE_48: со стекингом 0.7885 против 0.7888; Δ = -0.0003 [-0.0015; +0.0011]
+[LightGBM START] fit | features=98 | rounds=300
+[LightGBM DONE] fit | best_iter=212 | sel=0.7705 | rep=0.7904
+POOL2: со стекингом 0.7904 против 0.7894; Δ = +0.0010 [-0.0004; +0.0024]
+=== последовательная модель: стекинг: готово за 337 с ===
+
+======================================================================
+=== ГРАФ ПРОТИВ ПУЛА + НОВЫЕ ПАРЫ ===
+======================================================================
+[INFO] базовый пул: 97 признаков
+[INFO] графовых признаков: 9
+[INFO] общий пул: 106 признаков
+[RAM] перед graph_compare: 4.61 GB
+
+[START] compare_rfe_generic
+
+======================================================================
+RFE: 'пул+граф'
+Признаков в расширенном пуле: 106
+Целевые K: (48, 26)
+RFE rounds: 220
+======================================================================
+
+[1/4] Запуск RFE на расширенном пуле...
+[RFE] target K=48 | step=1 | 106 -> ...
+[LightGBM START] RFE K=48 step=1 | features=106 | rounds=220
+[LightGBM DONE] RFE K=48 step=1 | best_iter=153 | sel=0.7710 | rep=0.7909
+[RFE] K=48: 106 -> 90
+[RFE] target K=48 | step=2 | 90 -> ...
+[LightGBM START] RFE K=48 step=2 | features=90 | rounds=220
+[LightGBM DONE] RFE K=48 step=2 | best_iter=147 | sel=0.7708 | rep=0.7894
+[RFE] K=48: 90 -> 76
+[RFE] target K=48 | step=3 | 76 -> ...
+[LightGBM START] RFE K=48 step=3 | features=76 | rounds=220
+[LightGBM DONE] RFE K=48 step=3 | best_iter=182 | sel=0.7706 | rep=0.7889
+[RFE] K=48: 76 -> 64
+[LightGBM DONE] RFE K=48 step=4 | best_iter=215 | sel=0.7718 | rep=0.7901
+[RFE] K=48: 64 -> 54
+[RFE] target K=48 | step=5 | 54 -> ...
+[LightGBM START] RFE K=48 step=5 | features=54 | rounds=220
+[LightGBM DONE] RFE K=48 step=5 | best_iter=110 | sel=0.7695 | rep=0.7887
+[RFE] K=48: 54 -> 48
+[RFE] ГОТОВ K=48: 48 признаков
+[RFE] target K=26 | step=1 | 48 -> ...
+[LightGBM START] RFE K=26 step=1 | features=48 | rounds=220
+[LightGBM DONE] RFE K=26 step=1 | best_iter=103 | sel=0.7701 | rep=0.7889
+[RFE] K=26: 48 -> 40
+[RFE] target K=26 | step=2 | 40 -> ...
+[LightGBM START] RFE K=26 step=2 | features=40 | rounds=220
+[LightGBM DONE] RFE K=26 step=2 | best_iter=113 | sel=0.7695 | rep=0.7884
+[RFE] K=26: 40 -> 34
+[RFE] target K=26 | step=3 | 34 -> ...
+[LightGBM START] RFE K=26 step=3 | features=34 | rounds=220
+[LightGBM DONE] RFE K=26 step=3 | best_iter=135 | sel=0.7699 | rep=0.7884
+[RFE] K=26: 34 -> 28
+[RFE] target K=26 | step=4 | 28 -> ...
+[LightGBM START] RFE K=26 step=4 | features=28 | rounds=220
+[LightGBM DONE] RFE K=26 step=4 | best_iter=98 | sel=0.7693 | rep=0.7880
+[RFE] K=26: 28 -> 26
+[RFE] ГОТОВ K=26: 26 признаков
+[1/4] RFE завершён за 530 с
+
+------------------------------------------------------------
+[2/4] K=48
+База: 48 признаков
+Новый набор: 48 признаков
+[CACHE] Используем уже обученную базу: база_48_пул+граф
+[BASE] K=48: rep=0.7888
+[LightGBM] Обучаем новый набор K=48
+[LightGBM START] пул+граф K=48 | features=48 | rounds=300
+[LightGBM DONE] пул+граф K=48 | best_iter=103 | sel=0.7701 | rep=0.7889
+[NEW] K=48: sel=0.7701 | rep=0.7889
+[DIFF] K=48: пул+граф - база = +0.0000 [-0.0015; +0.0016]
+[SAVE] промежуточный результат K=48 сохранён
+
+------------------------------------------------------------
+[2/4] K=26
+База: 26 признаков
+Новый набор: 26 признаков
+[CACHE] Используем уже обученную базу: база_26_пул+граф
+[BASE] K=26: rep=0.7875
+[LightGBM] Обучаем новый набор K=26
+[LightGBM START] пул+граф K=26 | features=26 | rounds=300
+[LightGBM DONE] пул+граф K=26 | best_iter=240 | sel=0.7700 | rep=0.7882
+[NEW] K=26: sel=0.7700 | rep=0.7882
+[DIFF] K=26: пул+граф - база = +0.0006 [-0.0010; +0.0023]
+[SAVE] промежуточный результат K=26 сохранён
+
+======================================================================
+RFE 'пул+граф' ЗАВЕРШЁН
+Время: 638 с
+======================================================================
+ K        d        lo       hi     база    новый
+48 0.000020 -0.001543 0.001601 0.788832 0.788852
+26 0.000612 -0.001030 0.002283 0.787550 0.788161
+
+[DONE] compare_rfe_generic
+
+[START] анализ новых/повторных пар
+доля новых пар на rep: 0.307
+[STRAT] K=48 | новые пары
+K=48, новые пары: пул+граф - база = +0.0012 [-0.0021; +0.0054]
+[STRAT] K=48 | повторные пары
+K=48, повторные пары: пул+граф - база = -0.0004 [-0.0019; +0.0011]
+[STRAT] K=26 | новые пары
+K=26, новые пары: пул+граф - база = -0.0038 [-0.0078; +0.0004]
+[STRAT] K=26 | повторные пары
+K=26, повторные пары: пул+граф - база = +0.0013 [-0.0004; +0.0029]
+
+[OK] results/graph_novel_pairs.csv сохранён
+[RAM] после graph_compare: 4.63 GB
+
+======================================================================
+=== ГРАФ ПРОТИВ ПУЛА + НОВЫЕ ПАРЫ: ГОТОВО ===
+Время: 639 с
+======================================================================
+=== обратная связь (лайки, дизлайки) ===
+event_type
+like         107314
+unlike        39922
+dislike        9886
+undislike      2230
+listen            0
+Name: count, dtype: int64
+тест feedback_feats пройден
+33 признаков обратной связи: ['ui_like_net_30d', 'ui_like_net_90d', 'ui_like_net_400d', 'ui_dislike_net_30d', 'ui_dislike_net_90d', 'ui_dislike_net_400d'] ...
+ui_like_net_400d ненулевых: 0.1966 | NDCG@10 одной фичи: 0.7094
+uart_like_net_400d ненулевых: 0.3461 | NDCG@10 одной фичи: 0.7101
+user_like_per_listen_400d ненулевых: 0.9149 | NDCG@10 одной фичи: 0.695
+
+======================================================================
+RFE: 'пул+обратная_связь'
+Признаков в расширенном пуле: 130
+Целевые K: (48, 26)
+RFE rounds: 220
+======================================================================
+
+[1/4] Запуск RFE на расширенном пуле...
+[RFE] target K=48 | step=1 | 130 -> ...
+[LightGBM START] RFE K=48 step=1 | features=130 | rounds=220
+[LightGBM DONE] RFE K=48 step=1 | best_iter=112 | sel=0.7687 | rep=0.7900
+[RFE] K=48: 130 -> 110
+[RFE] target K=48 | step=2 | 110 -> ...
+[LightGBM START] RFE K=48 step=2 | features=110 | rounds=220
+[LightGBM DONE] RFE K=48 step=2 | best_iter=213 | sel=0.7716 | rep=0.7903
+[RFE] K=48: 110 -> 93
+[RFE] target K=48 | step=3 | 93 -> ...
+[LightGBM START] RFE K=48 step=3 | features=93 | rounds=220
+[LightGBM DONE] RFE K=48 step=3 | best_iter=96 | sel=0.7697 | rep=0.7898
+[RFE] K=48: 93 -> 79
+[RFE] target K=48 | step=4 | 79 -> ...
+[LightGBM START] RFE K=48 step=4 | features=79 | rounds=220
+[LightGBM DONE] RFE K=48 step=4 | best_iter=166 | sel=0.7722 | rep=0.7893
+[RFE] K=48: 79 -> 67
+[RFE] target K=48 | step=5 | 67 -> ...
+[LightGBM START] RFE K=48 step=5 | features=67 | rounds=220
+[LightGBM DONE] RFE K=48 step=5 | best_iter=142 | sel=0.7695 | rep=0.7890
+[RFE] K=48: 67 -> 56
+[RFE] target K=48 | step=6 | 56 -> ...
+[LightGBM START] RFE K=48 step=6 | features=56 | rounds=220
+[LightGBM DONE] RFE K=48 step=6 | best_iter=158 | sel=0.7708 | rep=0.7897
+[RFE] K=48: 56 -> 48
+[RFE] ГОТОВ K=48: 48 признаков
+[RFE] target K=26 | step=1 | 48 -> ...
+[LightGBM START] RFE K=26 step=1 | features=48 | rounds=220
+[LightGBM DONE] RFE K=26 step=1 | best_iter=95 | sel=0.7689 | rep=0.7881
+[RFE] K=26: 48 -> 40
+[RFE] target K=26 | step=2 | 40 -> ...
+[LightGBM START] RFE K=26 step=2 | features=40 | rounds=220
+[LightGBM DONE] RFE K=26 step=2 | best_iter=185 | sel=0.7706 | rep=0.7886
+[RFE] K=26: 40 -> 34
+[RFE] target K=26 | step=3 | 34 -> ...
+[LightGBM START] RFE K=26 step=3 | features=34 | rounds=220
+[LightGBM DONE] RFE K=26 step=3 | best_iter=126 | sel=0.7698 | rep=0.7882
+[RFE] K=26: 34 -> 28
+[RFE] target K=26 | step=4 | 28 -> ...
+[LightGBM START] RFE K=26 step=4 | features=28 | rounds=220
+[LightGBM DONE] RFE K=26 step=4 | best_iter=206 | sel=0.7687 | rep=0.7871
+[RFE] K=26: 28 -> 26
+[RFE] ГОТОВ K=26: 26 признаков
+[1/4] RFE завершён за 634 с
+
+------------------------------------------------------------
+[2/4] K=48
+База: 48 признаков
+Новый набор: 48 признаков
+[LightGBM] Обучаем базу K=48
+[LightGBM START] BASE K=48 | features=48 | rounds=300
+[LightGBM DONE] BASE K=48 | best_iter=183 | sel=0.7698 | rep=0.7888
+[BASE] K=48: rep=0.7888
+[LightGBM] Обучаем новый набор K=48
+[LightGBM START] пул+обратная_связь K=48 | features=48 | rounds=300
+[LightGBM DONE] пул+обратная_связь K=48 | best_iter=95 | sel=0.7689 | rep=0.7881
+[NEW] K=48: sel=0.7689 | rep=0.7881
+[DIFF] K=48: пул+обратная_связь - база = -0.0007 [-0.0021; +0.0007]
+[SAVE] промежуточный результат K=48 сохранён
+
+------------------------------------------------------------
+[2/4] K=26
+База: 26 признаков
+Новый набор: 26 признаков
+[LightGBM] Обучаем базу K=26
+[LightGBM START] BASE K=26 | features=26 | rounds=300
+[LightGBM DONE] BASE K=26 | best_iter=69 | sel=0.7678 | rep=0.7875
+[BASE] K=26: rep=0.7875
+[LightGBM] Обучаем новый набор K=26
+[LightGBM START] пул+обратная_связь K=26 | features=26 | rounds=300
+[LightGBM DONE] пул+обратная_связь K=26 | best_iter=100 | sel=0.7675 | rep=0.7868
+[NEW] K=26: sel=0.7675 | rep=0.7868
+[DIFF] K=26: пул+обратная_связь - база = -0.0008 [-0.0020; +0.0005]
+[SAVE] промежуточный результат K=26 сохранён
+
+======================================================================
+RFE 'пул+обратная_связь' ЗАВЕРШЁН
+Время: 802 с
+======================================================================
+ K         d        lo       hi     база    новый
+48 -0.000735 -0.002055 0.000671 0.788832 0.788097
+26 -0.000755 -0.001962 0.000474 0.787550 0.786795
+новые признаки в отобранном наборе K=26: []
+новые признаки в отобранном наборе K=48: []
+=== обратная связь (лайки, дизлайки): готово за 848 с ===
+=== ядра затухания ===
+тест decay_feats пройден
+ядра: ui
+ядра: uart
+ядра: ualb
+ядра: user
+тип       прямоугольное окно: доля  прямоугольное окно: число  экспоненциальное: доля  экспоненциальное: число
+параметр                                                                                                      
+1                           0.7150                     0.7136                     NaN                      NaN
+2                           0.7205                     0.7204                     NaN                      NaN
+3                           0.7244                     0.7230                  0.7391                   0.7409
+5                           0.7279                     0.7271                     NaN                      NaN
+7                           0.7303                     0.7296                  0.7422                   0.7426
+10                          0.7333                     0.7327                     NaN                      NaN
+14                          0.7361                     0.7356                  0.7437                   0.7436
+21                          0.7385                     0.7382                     NaN                      NaN
+30                          0.7395                     0.7397                  0.7454                   0.7417
+45                          0.7410                     0.7404                     NaN                      NaN
+60                          0.7406                     0.7389                  0.7465                   0.7397
+90                          0.7425                     0.7372                     NaN                      NaN
+120                         0.7438                     0.7348                  0.7468                   0.7373
+180                         0.7451                     0.7346                     NaN                      NaN
+240                            NaN                        NaN                  0.7463                   0.7354
+400                         0.7461                     0.7323                     NaN                      NaN
+
+======================================================================
+RFE: 'только_ядра'
+Признаков в расширенном пуле: 70
+Целевые K: (48, 26)
+RFE rounds: 220
+======================================================================
+
+[1/4] Запуск RFE на расширенном пуле...
+[RFE] target K=48 | step=1 | 70 -> ...
+[LightGBM START] RFE K=48 step=1 | features=70 | rounds=220
+[LightGBM DONE] RFE K=48 step=1 | best_iter=134 | sel=0.7680 | rep=0.7894
+[RFE] K=48: 70 -> 59
+[RFE] target K=48 | step=2 | 59 -> ...
+[LightGBM START] RFE K=48 step=2 | features=59 | rounds=220
+[LightGBM DONE] RFE K=48 step=2 | best_iter=86 | sel=0.7673 | rep=0.7883
+[RFE] K=48: 59 -> 50
+[RFE] target K=48 | step=3 | 50 -> ...
+[LightGBM START] RFE K=48 step=3 | features=50 | rounds=220
+[LightGBM DONE] RFE K=48 step=3 | best_iter=145 | sel=0.7687 | rep=0.7889
+[RFE] K=48: 50 -> 48
+[RFE] ГОТОВ K=48: 48 признаков
+[RFE] target K=26 | step=1 | 48 -> ...
+[LightGBM START] RFE K=26 step=1 | features=48 | rounds=220
+[LightGBM DONE] RFE K=26 step=1 | best_iter=185 | sel=0.7692 | rep=0.7899
+[RFE] K=26: 48 -> 40
+[RFE] target K=26 | step=2 | 40 -> ...
+[LightGBM START] RFE K=26 step=2 | features=40 | rounds=220
+[LightGBM DONE] RFE K=26 step=2 | best_iter=197 | sel=0.7693 | rep=0.7894
+[RFE] K=26: 40 -> 34
+[RFE] target K=26 | step=3 | 34 -> ...
+[LightGBM START] RFE K=26 step=3 | features=34 | rounds=220
+[LightGBM DONE] RFE K=26 step=3 | best_iter=137 | sel=0.7689 | rep=0.7895
+[RFE] K=26: 34 -> 28
+[RFE] target K=26 | step=4 | 28 -> ...
+[LightGBM START] RFE K=26 step=4 | features=28 | rounds=220
+[LightGBM DONE] RFE K=26 step=4 | best_iter=95 | sel=0.7677 | rep=0.7886
+[RFE] K=26: 28 -> 26
+[RFE] ГОТОВ K=26: 26 признаков
+[1/4] RFE завершён за 374 с
+
+------------------------------------------------------------
+[2/4] K=48
+База: 48 признаков
+Новый набор: 48 признаков
+[LightGBM] Обучаем базу K=48
+[LightGBM START] BASE K=48 | features=48 | rounds=300
+[LightGBM DONE] BASE K=48 | best_iter=183 | sel=0.7698 | rep=0.7888
+[BASE] K=48: rep=0.7888
+[LightGBM] Обучаем новый набор K=48
+[LightGBM START] только_ядра K=48 | features=48 | rounds=300
+[LightGBM DONE] только_ядра K=48 | best_iter=185 | sel=0.7692 | rep=0.7899
+[NEW] K=48: sel=0.7692 | rep=0.7899
+[DIFF] K=48: только_ядра - база = +0.0010 [-0.0005; +0.0025]
+[SAVE] промежуточный результат K=48 сохранён
+
+------------------------------------------------------------
+[2/4] K=26
+База: 26 признаков
+Новый набор: 26 признаков
+[LightGBM] Обучаем базу K=26
+[LightGBM START] BASE K=26 | features=26 | rounds=300
+[LightGBM DONE] BASE K=26 | best_iter=69 | sel=0.7678 | rep=0.7875
+[BASE] K=26: rep=0.7875
+[LightGBM] Обучаем новый набор K=26
+[LightGBM START] только_ядра K=26 | features=26 | rounds=300
+[LightGBM DONE] только_ядра K=26 | best_iter=165 | sel=0.7682 | rep=0.7882
+[NEW] K=26: sel=0.7682 | rep=0.7882
+[DIFF] K=26: только_ядра - база = +0.0007 [-0.0010; +0.0023]
+[SAVE] промежуточный результат K=26 сохранён
+
+======================================================================
+RFE 'только_ядра' ЗАВЕРШЁН
+Время: 575 с
+======================================================================
+ K        d        lo       hi     база    новый
+48 0.001026 -0.000498 0.002486 0.788832 0.789858
+26 0.000683 -0.000980 0.002264 0.787550 0.788232
+
+======================================================================
+RFE: 'пул+ядра'
+Признаков в расширенном пуле: 153
+Целевые K: (48, 26)
+RFE rounds: 220
+======================================================================
+
+[1/4] Запуск RFE на расширенном пуле...
+[RFE] target K=48 | step=1 | 153 -> ...
+[LightGBM START] RFE K=48 step=1 | features=153 | rounds=220
+[LightGBM DONE] RFE K=48 step=1 | best_iter=179 | sel=0.7701 | rep=0.7892
+[RFE] K=48: 153 -> 130
+[RFE] target K=48 | step=2 | 130 -> ...
+[LightGBM START] RFE K=48 step=2 | features=130 | rounds=220
+[LightGBM DONE] RFE K=48 step=2 | best_iter=219 | sel=0.7706 | rep=0.7903
+[RFE] K=48: 130 -> 110
+[RFE] target K=48 | step=3 | 110 -> ...
+[LightGBM START] RFE K=48 step=3 | features=110 | rounds=220
+[LightGBM DONE] RFE K=48 step=3 | best_iter=218 | sel=0.7702 | rep=0.7898
+[RFE] K=48: 110 -> 93
+[RFE] target K=48 | step=4 | 93 -> ...
+[LightGBM START] RFE K=48 step=4 | features=93 | rounds=220
+[LightGBM DONE] RFE K=48 step=4 | best_iter=164 | sel=0.7701 | rep=0.7903
+[RFE] K=48: 93 -> 79
+[RFE] target K=48 | step=5 | 79 -> ...
+[LightGBM START] RFE K=48 step=5 | features=79 | rounds=220
+[LightGBM DONE] RFE K=48 step=5 | best_iter=211 | sel=0.7700 | rep=0.7902
+[RFE] K=48: 79 -> 67
+[RFE] target K=48 | step=6 | 67 -> ...
+[LightGBM START] RFE K=48 step=6 | features=67 | rounds=220
+[LightGBM DONE] RFE K=48 step=6 | best_iter=125 | sel=0.7697 | rep=0.7895
+[RFE] K=48: 67 -> 56
+[RFE] target K=48 | step=7 | 56 -> ...
+[LightGBM START] RFE K=48 step=7 | features=56 | rounds=220
+[LightGBM DONE] RFE K=48 step=7 | best_iter=132 | sel=0.7698 | rep=0.7892
+[RFE] K=48: 56 -> 48
+[RFE] ГОТОВ K=48: 48 признаков
+[RFE] target K=26 | step=1 | 48 -> ...
+[LightGBM START] RFE K=26 step=1 | features=48 | rounds=220
+[LightGBM DONE] RFE K=26 step=1 | best_iter=136 | sel=0.7702 | rep=0.7897
+[RFE] K=26: 48 -> 40
+[RFE] target K=26 | step=2 | 40 -> ...
+[LightGBM START] RFE K=26 step=2 | features=40 | rounds=220
+[LightGBM DONE] RFE K=26 step=2 | best_iter=156 | sel=0.7694 | rep=0.7896
+[RFE] K=26: 40 -> 34
+[RFE] target K=26 | step=3 | 34 -> ...
+[LightGBM START] RFE K=26 step=3 | features=34 | rounds=220
+[LightGBM DONE] RFE K=26 step=3 | best_iter=152 | sel=0.7689 | rep=0.7890
+[RFE] K=26: 34 -> 28
+[RFE] target K=26 | step=4 | 28 -> ...
+[LightGBM START] RFE K=26 step=4 | features=28 | rounds=220
+[LightGBM DONE] RFE K=26 step=4 | best_iter=118 | sel=0.7689 | rep=0.7888
+[RFE] K=26: 28 -> 26
+[RFE] ГОТОВ K=26: 26 признаков
+[1/4] RFE завершён за 788 с
+
+------------------------------------------------------------
+[2/4] K=48
+База: 48 признаков
+Новый набор: 48 признаков
+[LightGBM] Обучаем базу K=48
+[LightGBM START] BASE K=48 | features=48 | rounds=300
+[LightGBM DONE] BASE K=48 | best_iter=183 | sel=0.7698 | rep=0.7888
+[BASE] K=48: rep=0.7888
+[LightGBM] Обучаем новый набор K=48
+[LightGBM START] пул+ядра K=48 | features=48 | rounds=300
+[LightGBM DONE] пул+ядра K=48 | best_iter=136 | sel=0.7702 | rep=0.7897
+[NEW] K=48: sel=0.7702 | rep=0.7897
+[DIFF] K=48: пул+ядра - база = +0.0008 [-0.0006; +0.0022]
+[SAVE] промежуточный результат K=48 сохранён
+
+------------------------------------------------------------
+[2/4] K=26
+База: 26 признаков
+Новый набор: 26 признаков
+[LightGBM] Обучаем базу K=26
+[LightGBM START] BASE K=26 | features=26 | rounds=300
+[LightGBM DONE] BASE K=26 | best_iter=69 | sel=0.7678 | rep=0.7875
+[BASE] K=26: rep=0.7875
+[LightGBM] Обучаем новый набор K=26
+[LightGBM START] пул+ядра K=26 | features=26 | rounds=300
+[LightGBM DONE] пул+ядра K=26 | best_iter=210 | sel=0.7693 | rep=0.7884
+[NEW] K=26: sel=0.7693 | rep=0.7884
+[DIFF] K=26: пул+ядра - база = +0.0009 [-0.0008; +0.0024]
+[SAVE] промежуточный результат K=26 сохранён
+
+======================================================================
+RFE 'пул+ядра' ЗАВЕРШЁН
+Время: 988 с
+======================================================================
+ K        d        lo       hi     база    новый
+48 0.000843 -0.000565 0.002233 0.788832 0.789675
+26 0.000851 -0.000762 0.002425 0.787550 0.788401
+=== ядра затухания: готово за 1596 с ===
+```
+рупп sel/rep: 8039 8213 | пересечение пользователей: 0
+rep: случайный 0.6950 | популярность 0.7226
+M1     (26): NDCG@10 sel=0.7555 rep=0.7792
+M2     (48): NDCG@10 sel=0.7666 rep=0.7860
+POOL2  (97): NDCG@10 sel=0.7703 rep=0.7894
+
+=== E1 страты и недели ===
+RFE-26 - M2 (разность на rep): +0.0015 [-0.0003; +0.0034]
+  сравнение                                          страта  доля_строк  групп      A      B      d      lo     hi
+RFE-26 - M1                     пары: новые (ui_cnt_400d=0)       0.307   2966 0.7355 0.7439 0.0084  0.0044 0.0124
+RFE-26 - M1                                 пары: повторные       0.693   5293 0.7941 0.8010 0.0069  0.0037 0.0097
+RFE-26 - M1      популярность трека (gitem_cnt_90d): низкая       0.334   3235 0.7744 0.7844 0.0101  0.0066 0.0140
+RFE-26 - M1     популярность трека (gitem_cnt_90d): средняя       0.333   3680 0.7835 0.7886 0.0051  0.0013 0.0088
+RFE-26 - M1     популярность трека (gitem_cnt_90d): высокая       0.333   3456 0.7823 0.7873 0.0050  0.0013 0.0082
+RFE-26 - M1  активность пользователя (user_cnt_30d): низкая       0.333   2785 0.7726 0.7828 0.0102  0.0063 0.0147
+RFE-26 - M1 активность пользователя (user_cnt_30d): средняя       0.334   2204 0.7793 0.7866 0.0073  0.0034 0.0113
+RFE-26 - M1 активность пользователя (user_cnt_30d): высокая       0.333   1383 0.7921 0.7987 0.0066  0.0002 0.0129
+пул v2 - M2                     пары: новые (ui_cnt_400d=0)       0.307   2966 0.7409 0.7425 0.0016 -0.0008 0.0043
+пул v2 - M2                                 пары: повторные       0.693   5293 0.8002 0.8035 0.0033  0.0016 0.0051
+пул v2 - M2      популярность трека (gitem_cnt_90d): низкая       0.334   3235 0.7822 0.7842 0.0020 -0.0005 0.0045
+пул v2 - M2     популярность трека (gitem_cnt_90d): средняя       0.333   3680 0.7885 0.7904 0.0019 -0.0001 0.0039
+пул v2 - M2     популярность трека (gitem_cnt_90d): высокая       0.333   3456 0.7865 0.7897 0.0032  0.0009 0.0053
+пул v2 - M2  активность пользователя (user_cnt_30d): низкая       0.333   2785 0.7778 0.7823 0.0045  0.0018 0.0076
+пул v2 - M2 активность пользователя (user_cnt_30d): средняя       0.334   2204 0.7865 0.7902 0.0036  0.0011 0.0063
+пул v2 - M2 активность пользователя (user_cnt_30d): высокая       0.333   1383 0.8018 0.8027 0.0009 -0.0025 0.0041
+ неделя   сравнение  доля_строк  групп      A      B      d      lo     hi
+     36 RFE-26 - M1       0.205   1370 0.7790 0.7876 0.0087  0.0032 0.0134
+     36 пул v2 - M2       0.205   1370 0.7845 0.7889 0.0044  0.0006 0.0084
+     37 RFE-26 - M1       0.284   1814 0.7803 0.7877 0.0074  0.0027 0.0123
+     37 пул v2 - M2       0.284   1814 0.7855 0.7887 0.0032  0.0005 0.0064
+     38 RFE-26 - M1       0.290   1814 0.7739 0.7843 0.0104  0.0062 0.0156
+     38 пул v2 - M2       0.290   1814 0.7824 0.7878 0.0054  0.0020 0.0089
+     39 RFE-26 - M1       0.222   1374 0.7847 0.7916 0.0068  0.0010 0.0123
+     39 пул v2 - M2       0.222   1374 0.7930 0.7931 0.0001 -0.0040 0.0040
+=== E1 страты и недели: готово за 31 с ===
+
+=== E2 избыточность (граф) ===
+кластеры пула v2 (|rho|>порог): {0.95: 69, 0.9: 46, 0.8: 24}
+              признак  max_abs_rho      ближайший
+ graph_taste_neg_400d        0.283  gitem_cnt_90d
+ graph_taste_diff_30d        0.271  uart_rate_30d
+  graph_taste_neg_90d        0.267  gitem_cnt_90d
+ graph_taste_diff_90d        0.260  uart_rate_90d
+graph_taste_diff_400d        0.257 gitem_rate_90d
+  graph_taste_pos_90d        0.250   uart_cnt_90d
+  graph_taste_neg_30d        0.248  gitem_cnt_90d
+  graph_taste_pos_30d        0.247   uart_cnt_30d
+ graph_taste_pos_400d        0.239  uart_cnt_400d
+доля новых признаков с max|rho|>0,8: 0.0
+=== E2 избыточность (граф): готово за 13 с === 
+
+=== E4 условная избыточность (граф) ===
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_pos_30d 0.178
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_pos_400d 0.199
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_neg_30d 0.187
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_neg_90d 0.202
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_neg_400d 0.225
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_diff_30d 0.123
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_diff_90d 0.131
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+graph_taste_diff_400d 0.078
+=== E4 условная избыточность (граф):
+
+=== E3 устойчивость отбора ===
+подвыборка 1/5: 421 с
+подвыборка 2/5: 430 с
+подвыборка 3/5: 452 с
+подвыборка 4/5: 420 с
+подвыборка 5/5: 408 с
+ K  жаккар_между_подвыборками  жаккар_с_полным_RFE  ядро_во_всех_подвыборках
+26                      0.607                0.568                        13
+48                      0.730                0.765                        34
+=== E3 устойчивость отбора: готово за 2131 с ===
+
+вот что вывела та часть которая планировалась на первую ночь, что делать дальше и как это интерпретировать, какие эксперементы можно провеести еще за остаток времени
+
+```
+=== агенты на 10 seed ===
+random seed 0
+random seed 1
+random seed 2
+random seed 3
+  раунд 1: лучший ui_mean_pr_33d Δ=+0.0027 (принят); принято 1
+  раунд 2: лучший uart_mean_pr_1d Δ=+0.0019 (принят); принято 2
+  раунд 3: лучший ualb_skip_rate_265d Δ=+0.0020 (принят); принято 3
+  раунд 4: лучший art_rate_87d Δ=+0.0011; принято 3
+  раунд 5: лучший ui_mean_pr_162d Δ=+0.0022 (принят); принято 4
+  раунд 6: лучший art_full_rate_22d Δ=+0.0021 (принят); принято 5
+  раунд 7: лучший ui_skip_rate_249d Δ=+0.0003; принято 5
+  раунд 8: лучший art_full_rate_130d Δ=+0.0010; принято 5
+  раунд 9: лучший ualb_skip_rate_274d Δ=+0.0000; принято 5
+  раунд 10: лучший item_cnt_33d Δ=+0.0000; принято 5
+random seed 4
+  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+  раунд 2: лучший ui_full_rate_283d Δ=+0.0029 (принят); принято 2
+  раунд 3: лучший user_full_rate_5d Δ=+0.0022 (принят); принято 3
+  раунд 4: лучший ualb_mean_pr_307d Δ=+0.0008; принято 3
+  раунд 5: лучший ui_skip_rate_68d Δ=+0.0007; принято 3
+  раунд 6: лучший uart_skip_rate_35d Δ=+0.0003; принято 3
+  раунд 7: лучший art_cnt_5d Δ=+0.0007; принято 3
+  раунд 8: лучший ui_cnt_278d Δ=+0.0008; принято 3
+  раунд 9: лучший uart_full_rate_43d Δ=+0.0005; принято 3
+  раунд 10: лучший art_cnt_57d Δ=+0.0005; принято 3
+random seed 5
+  раунд 1: лучший ualb_full_rate_126d Δ=+0.0049 (принят); принято 1
+  раунд 2: лучший ui_rate_213d Δ=+0.0039 (принят); принято 2
+  раунд 3: лучший user_skip_rate_13d Δ=+0.0007; принято 2
+  раунд 4: лучший uart_mean_pr_298d Δ=+0.0016 (принят); принято 3
+  раунд 5: лучший item_mean_pr_119d Δ=-0.0003; принято 3
+  раунд 6: лучший ui_skip_rate_270d Δ=+0.0008; принято 3
+  раунд 7: лучший ui_mean_pr_54d Δ=+0.0007; принято 3
+  раунд 8: лучший item_skip_rate_202d Δ=-0.0004; принято 3
+  раунд 9: лучший uart_mean_pr_147d Δ=-0.0008; принято 3
+  раунд 10: лучший uart_full_rate_23d Δ=-0.0010; принято 3
+random seed 6
+  раунд 1: лучший ualb_full_rate_110d Δ=+0.0057 (принят); принято 1
+  раунд 2: лучший ui_mean_pr_203d Δ=+0.0018 (принят); принято 2
+  раунд 3: лучший ui_cnt_179d Δ=+0.0045 (принят); принято 3
+  раунд 4: лучший alb_skip_rate_34d Δ=+0.0004; принято 3
+  раунд 5: лучший art_mean_pr_24d Δ=+0.0002; принято 3
+  раунд 6: лучший ui_skip_rate_328d Δ=+0.0003; принято 3
+  раунд 7: лучший user_rate_27d Δ=+0.0007; принято 3
+  раунд 8: лучший uart_rate_78d Δ=+0.0003; принято 3
+  раунд 9: лучший alb_full_rate_25d Δ=+0.0009; принято 3
+  раунд 10: лучший user_rate_45d Δ=+0.0009; принято 3
+random seed 7
+  раунд 1: лучший alb_skip_rate_216d Δ=+0.0015; принято 0
+  раунд 2: лучший ualb_skip_rate_374d Δ=+0.0060 (принят); принято 1
+  раунд 3: лучший uart_rate_195d Δ=+0.0019 (принят); принято 2
+  раунд 4: лучший uart_skip_rate_45d Δ=+0.0008; принято 2
+  раунд 5: лучший user_mean_pr_1d Δ=+0.0012; принято 2
+  раунд 6: лучший ualb_cnt_190d Δ=+0.0020 (принят); принято 3
+  раунд 7: лучший alb_cnt_268d Δ=-0.0001; принято 3
+  раунд 8: лучший uart_full_rate_21d Δ=+0.0003; принято 3
+  раунд 9: лучший ui_mean_pr_251d Δ=+0.0021 (принят); принято 4
+  раунд 10: лучший art_rate_1d Δ=+0.0008; принято 4
+random seed 8
+  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+  раунд 2: лучший uart_skip_rate_48d Δ=+0.0001; принято 1
+  раунд 3: лучший item_recency_d Δ=-0.0009; принято 1
+  раунд 4: лучший ualb_skip_rate_67d Δ=+0.0012; принято 1
+  раунд 5: лучший ui_mean_pr_328d Δ=+0.0051 (принят); принято 2
+  раунд 6: лучший item_mean_pr_44d Δ=+0.0007; принято 2
+  раунд 7: лучший user_full_rate_126d Δ=+0.0012; принято 2
+  раунд 8: лучший uart_full_rate_21d Δ=+0.0018 (принят); принято 3
+  раунд 9: лучший art_cnt_2d Δ=+0.0008; принято 3
+  раунд 10: лучший alb_recency_d Δ=+0.0005; принято 3
+random seed 9
+  раунд 1: лучший ualb_full_rate_240d Δ=+0.0066 (принят); принято 1
+  раунд 2: лучший ualb_mean_pr_115d Δ=+0.0006; принято 1
+  раунд 3: лучший user_mean_pr_41d Δ=+0.0019 (принят); принято 2
+  раунд 4: лучший ualb_full_rate_1d Δ=-0.0005; принято 2
+  раунд 5: лучший ui_skip_rate_114d Δ=+0.0000; принято 2
+  раунд 6: лучший ualb_cnt_108d Δ=-0.0005; принято 2
+  раунд 7: лучший uart_mean_pr_348d Δ=+0.0010; принято 2
+  раунд 8: лучший uart_full_rate_9d Δ=-0.0008; принято 2
+  раунд 9: лучший uart_rate_62d Δ=-0.0007; принято 2
+  раунд 10: лучший ui_skip_rate_115d Δ=-0.0002; принято 2
+evo seed 0
+  раунд 1: лучший ualb_skip_rate_271d Δ=+0.0060 (принят); принято 1
+  раунд 2: лучший ui_full_rate_49d Δ=+0.0014; принято 1
+  раунд 3: лучший ui_full_rate_98d Δ=+0.0021 (принят); принято 2
+  раунд 4: лучший user_mean_pr_93d Δ=+0.0008; принято 2
+  раунд 5: лучший uart_skip_rate_55d Δ=+0.0015 (принят); принято 3
+  раунд 6: лучший item_full_rate_54d Δ=-0.0003; принято 3
+  раунд 7: лучший ualb_skip_rate_27d Δ=-0.0003; принято 3
+  раунд 8: лучший ualb_cnt_271d Δ=+0.0015; принято 3
+  раунд 9: лучший ui_mean_pr_271d Δ=+0.0004; принято 3
+  раунд 10: лучший ualb_cnt_136d Δ=+0.0002; принято 3
+evo seed 1
+  раунд 1: лучший uart_skip_rate_297d Δ=+0.0046 (принят); принято 1
+  раунд 2: лучший uart_skip_rate_400d Δ=+0.0018 (принят); принято 2
+  раунд 3: лучший user_full_rate_111d Δ=-0.0014; принято 2
+  раунд 4: лучший ui_skip_rate_400d Δ=+0.0013; принято 2
+  раунд 5: лучший user_full_rate_7d Δ=-0.0012; принято 2
+  раунд 6: лучший ui_rate_400d Δ=+0.0018 (принят); принято 3
+  раунд 7: лучший art_rate_88d Δ=+0.0016 (принят); принято 4
+  раунд 8: лучший ui_skip_rate_103d Δ=-0.0003; принято 4
+  раунд 9: лучший alb_cnt_2d Δ=-0.0001; принято 4
+  раунд 10: лучший user_rate_280d Δ=+0.0006; принято 4
+evo seed 2
+  раунд 1: лучший uart_rate_51d Δ=+0.0038 (принят); принято 1
+  раунд 2: лучший uart_full_rate_162d Δ=+0.0019 (принят); принято 2
+  раунд 3: лучший uart_recency_d Δ=+0.0015; принято 2
+  раунд 4: лучший ui_full_rate_227d Δ=+0.0028 (принят); принято 3
+  раунд 5: лучший ui_skip_rate_329d Δ=+0.0015; принято 3
+  раунд 6: лучший uart_skip_rate_22d Δ=+0.0015; принято 3
+  раунд 7: лучший alb_full_rate_1d Δ=+0.0004; принято 3
+  раунд 8: лучший alb_cnt_1d Δ=+0.0016 (принят); принято 4
+  раунд 9: лучший item_mean_pr_4d Δ=-0.0004; принято 4
+  раунд 10: лучший uart_cnt_15d Δ=-0.0011; принято 4
+evo seed 3
+  раунд 1: лучший ui_mean_pr_33d Δ=+0.0027 (принят); принято 1
+  раунд 2: лучший ui_full_rate_3d Δ=+0.0014; принято 1
+  раунд 3: лучший uart_rate_163d Δ=+0.0047 (принят); принято 2
+  раунд 4: лучший user_rate_26d Δ=-0.0000; принято 2
+  раунд 5: лучший ui_full_rate_162d Δ=+0.0015 (принят); принято 3
+  раунд 6: лучший item_mean_pr_33d Δ=+0.0002; принято 3
+  раунд 7: лучший ualb_rate_55d Δ=-0.0000; принято 3
+  раунд 8: лучший user_cnt_26d Δ=+0.0009; принято 3
+  раунд 9: лучший ui_rate_184d Δ=+0.0005; принято 3
+  раунд 10: лучший uart_mean_pr_126d Δ=+0.0001; принято 3
+evo seed 4
+  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+  раунд 2: лучший uart_rate_15d Δ=-0.0003; принято 1
+  раунд 3: лучший ui_mean_pr_112d Δ=+0.0030 (принят); принято 2
+  раунд 4: лучший ui_mean_pr_56d Δ=+0.0011; принято 2
+  раунд 5: лучший ui_cnt_278d Δ=+0.0021 (принят); принято 3
+  раунд 6: лучший item_full_rate_334d Δ=+0.0027 (принят); принято 4
+  раунд 7: лучший ualb_cnt_33d Δ=-0.0005; принято 4
+  раунд 8: лучший uart_full_rate_384d Δ=+0.0018 (принят); принято 5
+  раунд 9: лучший item_rate_4d Δ=-0.0011; принято 5
+  раунд 10: лучший art_rate_1d Δ=-0.0010; принято 5
+evo seed 5
+  раунд 1: лучший ualb_full_rate_126d Δ=+0.0049 (принят); принято 1
+  раунд 2: лучший ui_rate_213d Δ=+0.0039 (принят); принято 2
+  раунд 3: лучший user_skip_rate_280d Δ=+0.0002; принято 2
+  раунд 4: лучший ui_cnt_48d Δ=+0.0007; принято 2
+  раунд 5: лучший uart_skip_rate_3d Δ=+0.0012; принято 2
+  раунд 6: лучший user_mean_pr_139d Δ=+0.0002; принято 2
+  раунд 7: лучший ualb_skip_rate_280d Δ=+0.0018 (принят); принято 3
+  раунд 8: лучший uart_mean_pr_3d Δ=+0.0004; принято 3
+  раунд 9: лучший alb_mean_pr_314d Δ=-0.0003; принято 3
+  раунд 10: лучший ui_rate_48d Δ=-0.0008; принято 3
+evo seed 6
+  раунд 1: лучший ualb_full_rate_110d Δ=+0.0057 (принят); принято 1
+  раунд 2: лучший ualb_skip_rate_163d Δ=+0.0020 (принят); принято 2
+  раунд 3: лучший ualb_cnt_326d Δ=+0.0016 (принят); принято 3
+  раунд 4: лучший ualb_mean_pr_3d Δ=+0.0009; принято 3
+  раунд 5: лучший ualb_mean_pr_6d Δ=+0.0007; принято 3
+  раунд 6: лучший uart_rate_4d Δ=+0.0011; принято 3
+  раунд 7: лучший ualb_cnt_228d Δ=+0.0008; принято 3
+  раунд 8: лучший art_full_rate_297d Δ=+0.0015; принято 3
+  раунд 9: лучший alb_full_rate_4d Δ=+0.0010; принято 3
+  раунд 10: лучший ui_full_rate_110d Δ=+0.0006; принято 3
+evo seed 7
+  раунд 1: лучший alb_skip_rate_216d Δ=+0.0015; принято 0
+  раунд 2: лучший uart_skip_rate_19d Δ=+0.0020 (принят); принято 1
+  раунд 3: лучший ualb_skip_rate_85d Δ=+0.0014; принято 1
+  раунд 4: лучший uart_rate_14d Δ=+0.0010; принято 1
+  раунд 5: лучший uart_skip_rate_38d Δ=+0.0008; принято 1
+  раунд 6: лучший uart_full_rate_21d Δ=+0.0015; принято 1
+  раунд 7: лучший ualb_full_rate_73d Δ=+0.0025 (принят); принято 2
+  раунд 8: лучший item_rate_31d Δ=+0.0024 (принят); принято 3
+  раунд 9: лучший ui_rate_175d Δ=+0.0014; принято 3
+  раунд 10: лучший ualb_full_rate_9d Δ=+0.0002; принято 3
+evo seed 8
+  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+  раунд 2: лучший ui_rate_370d Δ=+0.0053 (принят); принято 2
+  раунд 3: лучший uart_rate_14d Δ=+0.0011; принято 2
+  раунд 4: лучший art_mean_pr_257d Δ=+0.0011; принято 2
+  раунд 5: лучший art_rate_130d Δ=+0.0006; принято 2
+  раунд 6: лучший uart_full_rate_12d Δ=+0.0014; принято 2
+  раунд 7: лучший art_recency_d Δ=+0.0014; принято 2
+  раунд 8: лучший ualb_full_rate_82d Δ=+0.0006; принято 2
+  раунд 9: лучший ualb_cnt_136d Δ=+0.0019 (принят); принято 3
+  раунд 10: лучший ualb_mean_pr_22d Δ=+0.0012; принято 3
+evo seed 9
+  раунд 1: лучший ualb_full_rate_240d Δ=+0.0066 (принят); принято 1
+  раунд 2: лучший ualb_cnt_202d Δ=+0.0023 (принят); принято 2
+  раунд 3: лучший uart_full_rate_400d Δ=+0.0006; принято 2
+  раунд 4: лучший ui_rate_80d Δ=+0.0012; принято 2
+  раунд 5: лучший ualb_cnt_151d Δ=+0.0006; принято 2
+  раунд 6: лучший ualb_cnt_288d Δ=+0.0005; принято 2
+  раунд 7: лучший ui_mean_pr_276d Δ=+0.0023 (принят); принято 3
+  раунд 8: лучший ui_cnt_132d Δ=+0.0005; принято 3
+  раунд 9: лучший user_rate_8d Δ=+0.0008; принято 3
+  раунд 10: лучший ualb_skip_rate_11d Δ=+0.0012; принято 3
+surrogate seed 0
+  раунд 1: лучший ualb_skip_rate_271d Δ=+0.0060 (принят); принято 1
+  раунд 2: лучший ui_full_rate_49d Δ=+0.0014; принято 1
+  раунд 3: лучший uart_skip_rate_351d Δ=+0.0009; принято 1
+  раунд 4: лучший ui_mean_pr_266d Δ=+0.0034 (принят); принято 2
+  раунд 5: лучший ualb_mean_pr_1d Δ=+0.0010; принято 2
+  раунд 6: лучший ui_cnt_283d Δ=+0.0040 (принят); принято 3
+  раунд 7: лучший ui_full_rate_175d Δ=+0.0010; принято 3
+  раунд 8: лучший uart_skip_rate_2d Δ=+0.0005; принято 3
+  раунд 9: лучший uart_mean_pr_93d Δ=+0.0007; принято 3
+  раунд 10: лучший uart_skip_rate_149d Δ=+0.0007; принято 3
+surrogate seed 1
+  раунд 1: лучший uart_skip_rate_297d Δ=+0.0046 (принят); принято 1
+  раунд 2: лучший uart_mean_pr_356d Δ=+0.0024 (принят); принято 2
+  раунд 3: лучший uart_cnt_342d Δ=+0.0008; принято 2
+  раунд 4: лучший ui_mean_pr_302d Δ=+0.0038 (принят); принято 3
+  раунд 5: лучший ui_cnt_301d Δ=+0.0018 (принят); принято 4
+  раунд 6: лучший uart_rate_298d Δ=+0.0014; принято 4
+  раунд 7: лучший ui_rate_389d Δ=+0.0014; принято 4
+  раунд 8: лучший ui_rate_366d Δ=+0.0014; принято 4
+  раунд 9: лучший alb_recency_d Δ=+0.0015; принято 4
+  раунд 10: лучший ui_full_rate_342d Δ=+0.0014; принято 4
+surrogate seed 2
+  раунд 1: лучший uart_rate_51d Δ=+0.0038 (принят); принято 1
+  раунд 2: лучший alb_rate_254d Δ=+0.0005; принято 1
+  раунд 3: лучший ui_skip_rate_82d Δ=+0.0023 (принят); принято 2
+  раунд 4: лучший ui_skip_rate_57d Δ=+0.0013; принято 2
+  раунд 5: лучший uart_skip_rate_78d Δ=+0.0006; принято 2
+  раунд 6: лучший ui_skip_rate_132d Δ=+0.0015; принято 2
+  раунд 7: лучший ui_skip_rate_262d Δ=+0.0013; принято 2
+  раунд 8: лучший ui_full_rate_351d Δ=+0.0035 (принят); принято 3
+  раунд 9: лучший alb_full_rate_388d Δ=+0.0006; принято 3
+  раунд 10: лучший ui_cnt_177d Δ=+0.0018 (принят); принято 4
+surrogate seed 3
+  раунд 1: лучший ui_mean_pr_33d Δ=+0.0027 (принят); принято 1
+  раунд 2: лучший uart_mean_pr_1d Δ=+0.0019 (принят); принято 2
+  раунд 3: лучший uart_mean_pr_81d Δ=+0.0008; принято 2
+  раунд 4: лучший art_mean_pr_20d Δ=-0.0008; принято 2
+  раунд 5: лучший ui_recency_d Δ=-0.0005; принято 2
+  раунд 6: лучший uart_skip_rate_77d Δ=+0.0016 (принят); принято 3
+  раунд 7: лучший uart_cnt_121d Δ=+0.0010; принято 3
+  раунд 8: лучший ui_full_rate_73d Δ=+0.0013; принято 3
+  раунд 9: лучший ui_rate_73d Δ=+0.0023 (принят); принято 4
+  раунд 10: лучший ui_full_rate_153d Δ=+0.0002; принято 4
+surrogate seed 4
+  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+  раунд 2: лучший ui_full_rate_283d Δ=+0.0029 (принят); принято 2
+  раунд 3: лучший ui_full_rate_17d Δ=+0.0029 (принят); принято 3
+  раунд 4: лучший ualb_full_rate_20d Δ=-0.0008; принято 3
+  раунд 5: лучший ui_rate_13d Δ=-0.0003; принято 3
+  раунд 6: лучший item_recency_d Δ=-0.0002; принято 3
+  раунд 7: лучший ui_full_rate_9d Δ=-0.0002; принято 3
+  раунд 8: лучший ui_skip_rate_23d Δ=-0.0010; принято 3
+  раунд 9: лучший ualb_rate_355d Δ=+0.0014; принято 3
+  раунд 10: лучший uart_full_rate_287d Δ=+0.0008; принято 3
+surrogate seed 5
+  раунд 1: лучший ualb_full_rate_126d Δ=+0.0049 (принят); принято 1
+  раунд 2: лучший ui_rate_213d Δ=+0.0039 (принят); принято 2
+  раунд 3: лучший uart_full_rate_60d Δ=+0.0005; принято 2
+  раунд 4: лучший ui_cnt_392d Δ=+0.0027 (принят); принято 3
+  раунд 5: лучший ualb_mean_pr_155d Δ=+0.0014; принято 3
+  раунд 6: лучший ualb_full_rate_102d Δ=+0.0010; принято 3
+  раунд 7: лучший ui_mean_pr_242d Δ=+0.0010; принято 3
+  раунд 8: лучший uart_rate_1d Δ=+0.0008; принято 3
+  раунд 9: лучший ualb_rate_127d Δ=+0.0006; принято 3
+  раунд 10: лучший uart_skip_rate_8d Δ=+0.0010; принято 3
+surrogate seed 6
+  раунд 1: лучший ualb_full_rate_110d Δ=+0.0057 (принят); принято 1
+  раунд 2: лучший ui_mean_pr_203d Δ=+0.0018 (принят); принято 2
+  раунд 3: лучший ualb_rate_142d Δ=+0.0021 (принят); принято 3
+  раунд 4: лучший ualb_skip_rate_122d Δ=-0.0004; принято 3
+  раунд 5: лучший alb_full_rate_61d Δ=+0.0008; принято 3
+  раунд 6: лучший ualb_full_rate_48d Δ=+0.0002; принято 3
+  раунд 7: лучший ualb_cnt_98d Δ=+0.0009; принято 3
+  раунд 8: лучший ualb_cnt_94d Δ=+0.0012; принято 3
+  раунд 9: лучший ualb_cnt_166d Δ=+0.0010; принято 3
+  раунд 10: лучший ui_rate_196d Δ=+0.0007; принято 3
+surrogate seed 7
+  раунд 1: лучший alb_skip_rate_216d Δ=+0.0015; принято 0
+  раунд 2: лучший ualb_skip_rate_374d Δ=+0.0060 (принят); принято 1
+  раунд 3: лучший ualb_mean_pr_276d Δ=+0.0028 (принят); принято 2
+  раунд 4: лучший user_skip_rate_292d Δ=-0.0002; принято 2
+  раунд 5: лучший ualb_cnt_346d Δ=+0.0010; принято 2
+  раунд 6: лучший uart_mean_pr_271d Δ=+0.0010; принято 2
+  раунд 7: лучший uart_mean_pr_366d Δ=+0.0010; принято 2
+  раунд 8: лучший ui_cnt_255d Δ=+0.0023 (принят); принято 3
+  раунд 9: лучший ualb_cnt_390d Δ=+0.0013; принято 3
+  раунд 10: лучший uart_skip_rate_1d Δ=+0.0008; принято 3
+surrogate seed 8
+  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+  раунд 2: лучший uart_skip_rate_48d Δ=+0.0001; принято 1
+  раунд 3: лучший ualb_full_rate_25d Δ=-0.0003; принято 1
+  раунд 4: лучший ualb_cnt_192d Δ=-0.0007; принято 1
+  раунд 5: лучший alb_mean_pr_30d Δ=-0.0014; принято 1
+  раунд 6: лучший ui_rate_140d Δ=+0.0028 (принят); принято 2
+  раунд 7: лучший uart_mean_pr_149d Δ=+0.0042 (принят); принято 3
+  раунд 8: лучший ui_cnt_143d Δ=-0.0001; принято 3
+  раунд 9: лучший uart_cnt_154d Δ=-0.0018; принято 3
+  раунд 10: лучший uart_cnt_96d Δ=-0.0005; принято 3
+surrogate seed 9
+  раунд 1: лучший ualb_full_rate_240d Δ=+0.0066 (принят); принято 1
+  раунд 2: лучший ualb_mean_pr_115d Δ=+0.0006; принято 1
+  раунд 3: лучший ualb_rate_235d Δ=+0.0011; принято 1
+  раунд 4: лучший ualb_cnt_352d Δ=+0.0016 (принят); принято 2
+  раунд 5: лучший uart_full_rate_250d Δ=+0.0015; принято 2
+  раунд 6: лучший ualb_rate_258d Δ=+0.0012; принято 2
+  раунд 7: лучший ui_rate_230d Δ=+0.0027 (принят); принято 3
+  раунд 8: лучший ui_rate_111d Δ=+0.0011; принято 3
+  раунд 9: лучший ualb_full_rate_345d Δ=+0.0007; принято 3
+  раунд 10: лучший user_rate_240d Δ=+0.0012; принято 3
+    метод  seed  принято  оценок_до_первого    rep   d_M1  сек
+   random     0        3                  3 0.7870 0.0078  476
+   random     1        4                  1 0.7870 0.0079  479
+   random     2        4                  3 0.7846 0.0055  463
+   random     3        5                  7 0.7862 0.0070  475
+   random     4        3                  3 0.7849 0.0057  467
+   random     5        3                  1 0.7863 0.0072  469
+   random     6        3                  1 0.7864 0.0072  464
+   random     7        4                  9 0.7874 0.0083  467
+   random     8        3                  3 0.7875 0.0084  453
+   random     9        2                  1 0.7844 0.0052  453
+      evo     0        3                  3 0.7853 0.0062  464
+      evo     1        4                  1 0.7879 0.0087  471
+      evo     2        4                  3 0.7854 0.0062  466
+      evo     3        3                  7 0.7869 0.0078  461
+      evo     4        5                  3 0.7862 0.0071  461
+      evo     5        3                  1 0.7867 0.0075  457
+      evo     6        3                  1 0.7851 0.0060  461
+      evo     7        3                  9 0.7831 0.0040  437
+      evo     8        3                  3 0.7866 0.0075  445
+      evo     9        3                  1 0.7865 0.0073  438
+surrogate     0        3                  3 0.7869 0.0078  442
+surrogate     1        4                  1 0.7881 0.0090  450
+surrogate     2        4                  3 0.7867 0.0075  421
+surrogate     3        4                  7 0.7839 0.0047  435
+surrogate     4        3                  3 0.7863 0.0072  415
+surrogate     5        3                  1 0.7869 0.0077  422
+surrogate     6        3                  1 0.7860 0.0068  426
+surrogate     7        3                  9 0.7858 0.0067  448
+surrogate     8        3                  3 0.7847 0.0055  422
+surrogate     9        3                  1 0.7866 0.0074  452
+          принято             rep            d_M1        
+             mean     std    mean     std    mean     std
+метод                                                    
+evo           3.4  0.6992  0.7860  0.0013  0.0068  0.0013
+random        3.4  0.8433  0.7862  0.0012  0.0070  0.0012
+surrogate     3.3  0.4830  0.7862  0.0012  0.0070  0.0012
+      evo - random  surrogate - random
+seed                                  
+0          -0.0017             -0.0001
+1           0.0008              0.0011
+2           0.0008              0.0020
+3           0.0008             -0.0023
+4           0.0013              0.0014
+5           0.0004              0.0005
+6          -0.0012             -0.0004
+7          -0.0043             -0.0016
+8          -0.0009             -0.0029
+9           0.0021              0.0022
+evo - random         -0.0002
+surrogate - random    0.0000
+dtype: float64
+74 принятых признаков, зарегистрировано 72
+кластеры пула v2 (|rho|>порог): {0.95: 69, 0.9: 46, 0.8: 24}
+           признак  max_abs_rho       ближайший
+     ualb_cnt_326d        1.000   ualb_cnt_400d
+      ui_rate_370d        1.000    ui_rate_400d
+       ui_cnt_283d        1.000     ui_cnt_400d
+       ui_cnt_301d        1.000     ui_cnt_400d
+       ui_cnt_392d        1.000     ui_cnt_400d
+       ui_cnt_278d        1.000     ui_cnt_400d
+   ui_mean_pr_328d        1.000 ui_mean_pr_400d
+   ui_mean_pr_302d        1.000 ui_mean_pr_400d
+   ui_mean_pr_276d        1.000 ui_mean_pr_400d
+   ui_mean_pr_266d        1.000 ui_mean_pr_400d
+       ui_cnt_255d        1.000     ui_cnt_400d
+     ualb_cnt_352d        1.000   ualb_cnt_400d
+   ui_mean_pr_251d        1.000 ui_mean_pr_400d
+       ui_cnt_179d        1.000     ui_cnt_180d
+       ui_cnt_177d        1.000     ui_cnt_180d
+      ui_rate_230d        0.999    ui_rate_400d
+     ualb_cnt_202d        0.997   ualb_cnt_400d
+      ui_rate_213d        0.996    ui_rate_400d
+  user_mean_pr_54d        0.996   user_rate_60d
+  user_mean_pr_41d        0.995   user_rate_45d
+   ui_mean_pr_206d        0.995 ui_mean_pr_400d
+     ualb_cnt_190d        0.995   ualb_cnt_400d
+   ui_mean_pr_203d        0.994 ui_mean_pr_400d
+     item_rate_31d        0.993   item_rate_30d
+    uart_rate_195d        0.991  uart_rate_400d
+    ui_mean_pr_33d        0.988  ui_mean_pr_30d
+ user_full_rate_5d        0.987    user_rate_5d
+      ui_rate_140d        0.986    ui_rate_120d
+ uart_mean_pr_298d        0.985  uart_rate_400d
+ uart_mean_pr_356d        0.985  uart_rate_400d
+   ui_mean_pr_162d        0.980 ui_mean_pr_400d
+    uart_rate_163d        0.979  uart_rate_400d
+   ui_mean_pr_112d        0.978  ui_mean_pr_90d
+       ui_rate_73d        0.976     ui_rate_60d
+     ualb_cnt_136d        0.976   ualb_cnt_400d
+ ualb_mean_pr_276d        0.975  ualb_rate_400d
+user_skip_rate_63d        0.973   user_rate_60d
+ ui_full_rate_283d        0.968 ui_mean_pr_400d
+ ui_full_rate_351d        0.968 ui_mean_pr_400d
+    ualb_rate_142d        0.968  ualb_rate_400d
+доля новых признаков с max|rho|>0,8: 0.852
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+alb_cnt_1d 0.778
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+art_full_rate_22d 0.476
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+art_rate_88d 0.506
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+item_full_rate_334d 0.682
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+item_rate_31d 0.982
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_cnt_136d 0.943
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_cnt_190d 0.968
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_cnt_202d 0.972
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_cnt_326d 0.844
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_cnt_352d 0.89
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_full_rate_110d 0.941
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_full_rate_126d 0.939
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_full_rate_240d 0.961
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_full_rate_73d 0.933
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_mean_pr_276d 0.993
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_rate_142d 0.974
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_skip_rate_163d 0.893
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_skip_rate_265d 0.913
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_skip_rate_271d 0.911
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_skip_rate_274d 0.911
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_skip_rate_280d 0.915
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ualb_skip_rate_374d 0.913
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_full_rate_162d 0.92
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_full_rate_21d 0.884
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_full_rate_384d 0.945
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_mean_pr_149d 0.96
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_mean_pr_1d 0.75
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_mean_pr_298d 0.987
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_mean_pr_356d 0.987
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_rate_163d 0.975
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_rate_195d 0.988
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_rate_51d 0.951
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_skip_rate_19d 0.799
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_skip_rate_297d 0.865
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_skip_rate_400d 0.866
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_skip_rate_55d 0.828
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+uart_skip_rate_77d 0.848
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_cnt_177d 0.62
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_cnt_179d 0.619
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_cnt_255d 0.589
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_cnt_278d 0.602
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_cnt_283d 0.631
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_cnt_301d 0.735
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_cnt_392d 0.657
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_full_rate_162d 0.963
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_full_rate_227d 0.977
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_full_rate_283d 0.98
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_full_rate_351d 0.98
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_full_rate_98d 0.967
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_112d 0.987
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_162d 0.986
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_203d 0.993
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_206d 0.993
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_251d 1.0
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_266d 1.0
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_276d 1.0
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_302d 1.0
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_328d 1.0
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_mean_pr_33d 0.978
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_rate_140d 0.98
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_rate_213d 0.994
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_rate_230d 0.998
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_rate_370d 1.0
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_rate_73d 0.973
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_skip_rate_110d 0.938
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_skip_rate_243d 0.956
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+ui_skip_rate_82d 0.944
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+user_full_rate_5d 0.973
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+user_mean_pr_41d 0.988
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+user_mean_pr_54d 0.993
+/usr/local/lib/python3.13/dist-packages/sklearn/utils/validation.py:2739: UserWarning: X does not have valid feature names, but LGBMRegressor was fitted with feature names
+  warnings.warn(
+user_skip_rate_63d 0.922
+
+======================================================================
+RFE: 'пул_v3'
+Признаков в расширенном пуле: 169
+Целевые K: (48, 26)
+RFE rounds: 220
+======================================================================
+
+[1/4] Запуск RFE на расширенном пуле...
+[RFE] target K=48 | step=1 | 169 -> ...
+[LightGBM START] RFE K=48 step=1 | features=169 | rounds=220
+[LightGBM DONE] RFE K=48 step=1 | best_iter=159 | sel=0.7705 | rep=0.7891
+[RFE] K=48: 169 -> 143
+[RFE] target K=48 | step=2 | 143 -> ...
+[LightGBM START] RFE K=48 step=2 | features=143 | rounds=220
+[LightGBM DONE] RFE K=48 step=2 | best_iter=43 | sel=0.7676 | rep=0.7859
+[RFE] K=48: 143 -> 121
+[RFE] target K=48 | step=3 | 121 -> ...
+[LightGBM START] RFE K=48 step=3 | features=121 | rounds=220
+[LightGBM DONE] RFE K=48 step=3 | best_iter=212 | sel=0.7709 | rep=0.7892
+[RFE] K=48: 121 -> 102
+[RFE] target K=48 | step=4 | 102 -> ...
+[LightGBM START] RFE K=48 step=4 | features=102 | rounds=220
+[LightGBM DONE] RFE K=48 step=4 | best_iter=165 | sel=0.7690 | rep=0.7895
+[RFE] K=48: 102 -> 86
+[RFE] target K=48 | step=5 | 86 -> ...
+[LightGBM START] RFE K=48 step=5 | features=86 | rounds=220
+[LightGBM DONE] RFE K=48 step=5 | best_iter=144 | sel=0.7706 | rep=0.7893
+[RFE] K=48: 86 -> 73
+[RFE] target K=48 | step=6 | 73 -> ...
+[LightGBM START] RFE K=48 step=6 | features=73 | rounds=220
+[LightGBM DONE] RFE K=48 step=6 | best_iter=141 | sel=0.7701 | rep=0.7893
+[RFE] K=48: 73 -> 62
+[RFE] target K=48 | step=7 | 62 -> ...
+[LightGBM START] RFE K=48 step=7 | features=62 | rounds=220
+[LightGBM DONE] RFE K=48 step=7 | best_iter=146 | sel=0.7697 | rep=0.7884
+[RFE] K=48: 62 -> 52
+[RFE] target K=48 | step=8 | 52 -> ...
+[LightGBM START] RFE K=48 step=8 | features=52 | rounds=220
+[LightGBM DONE] RFE K=48 step=8 | best_iter=131 | sel=0.7692 | rep=0.7883
+[RFE] K=48: 52 -> 48
+[RFE] ГОТОВ K=48: 48 признаков
+[RFE] target K=26 | step=1 | 48 -> ...
+[LightGBM START] RFE K=26 step=1 | features=48 | rounds=220
+[LightGBM DONE] RFE K=26 step=1 | best_iter=74 | sel=0.7682 | rep=0.7878
+[RFE] K=26: 48 -> 40
+[RFE] target K=26 | step=2 | 40 -> ...
+[LightGBM START] RFE K=26 step=2 | features=40 | rounds=220
+[LightGBM DONE] RFE K=26 step=2 | best_iter=123 | sel=0.7676 | rep=0.7878
+[RFE] K=26: 40 -> 34
+[RFE] target K=26 | step=3 | 34 -> ...
+[LightGBM START] RFE K=26 step=3 | features=34 | rounds=220
+[LightGBM DONE] RFE K=26 step=3 | best_iter=160 | sel=0.7685 | rep=0.7871
+[RFE] K=26: 34 -> 28
+[RFE] target K=26 | step=4 | 28 -> ...
+[LightGBM START] RFE K=26 step=4 | features=28 | rounds=220
+[LightGBM DONE] RFE K=26 step=4 | best_iter=80 | sel=0.7670 | rep=0.7864
+[RFE] K=26: 28 -> 26
+[RFE] ГОТОВ K=26: 26 признаков
+[1/4] RFE завершён за 791 с
+
+------------------------------------------------------------
+[2/4] K=48
+База: 48 признаков
+Новый набор: 48 признаков
+[LightGBM] Обучаем базу K=48
+[LightGBM START] BASE K=48 | features=48 | rounds=300
+[LightGBM DONE] BASE K=48 | best_iter=183 | sel=0.7698 | rep=0.7888
+[BASE] K=48: rep=0.7888
+[LightGBM] Обучаем новый набор K=48
+[LightGBM START] пул_v3 K=48 | features=48 | rounds=300
+[LightGBM DONE] пул_v3 K=48 | best_iter=74 | sel=0.7682 | rep=0.7878
+[NEW] K=48: sel=0.7682 | rep=0.7878
+[DIFF] K=48: пул_v3 - база = -0.0010 [-0.0026; +0.0006]
+[SAVE] промежуточный результат K=48 сохранён
+
+------------------------------------------------------------
+[2/4] K=26
+База: 26 признаков
+Новый набор: 26 признаков
+[LightGBM] Обучаем базу K=26
+[LightGBM START] BASE K=26 | features=26 | rounds=300
+[LightGBM DONE] BASE K=26 | best_iter=69 | sel=0.7678 | rep=0.7875
+[BASE] K=26: rep=0.7875
+[LightGBM] Обучаем новый набор K=26
+[LightGBM START] пул_v3 K=26 | features=26 | rounds=300
+[LightGBM DONE] пул_v3 K=26 | best_iter=185 | sel=0.7672 | rep=0.7864
+[NEW] K=26: sel=0.7672 | rep=0.7864
+[DIFF] K=26: пул_v3 - база = -0.0012 [-0.0026; +0.0001]
+[SAVE] промежуточный результат K=26 сохранён
+
+======================================================================
+RFE 'пул_v3' ЗАВЕРШЁН
+Время: 970 с
+======================================================================
+ K         d        lo       hi     база    новый
+48 -0.001041 -0.002591 0.000559 0.788832 0.787791
+26 -0.001180 -0.002551 0.000072 0.787550 

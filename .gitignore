@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Data and intermediate artifacts
+data/
+*.parquet
+*.pkl
+*.joblib
+*.npy
+*.npz
+*.bin
+
+# Caches / temporary files
+cache/
+tmp/
+
+# OS
+.DS_Store
+Thumbs.db

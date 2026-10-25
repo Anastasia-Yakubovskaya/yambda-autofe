@@ -1,0 +1,762 @@
+9.2s	1	0.00s - Debugger warning: It seems that frozen modules are being used, which may
+9.2s	2	0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+9.2s	3	0.00s - to python to disable frozen modules.
+9.2s	4	0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+10.0s	5	0.00s - Debugger warning: It seems that frozen modules are being used, which may
+10.0s	6	0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+10.0s	7	0.00s - to python to disable frozen modules.
+10.0s	8	0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+24.9s	9	строк: 7110081 | доля label=1: 0.639
+24.9s	10	uid                 uint32
+24.9s	11	item_id             uint32
+24.9s	12	timestamp           uint32
+24.9s	13	is_organic           uint8
+24.9s	14	played_ratio_pct    uint16
+24.9s	15	label                 int8
+24.9s	16	dtype: object
+27.4s	17	            min       max     size
+27.4s	18	split                             
+27.4s	19	test   24037150  25999985   711011
+27.4s	20	train        15  21914120  5688063
+27.4s	21	val    21914135  24037145   711007
+29.8s	22	медиана gap / expected: 0.938
+30.4s	23	тест пройден, snap = None
+30.5s	24	тест пройден, snap = 86400
+108.9s	25	фичи посчитаны и сохранены в features_snap_u1500_s42.parquet
+108.9s	26	26 фичей: ['user_cnt_1d', 'user_rate_1d', 'user_cnt_7d', 'user_rate_7d', 'user_cnt_30d', 'user_rate_30d', 'item_cnt_1d', 'item_rate_1d', 'item_cnt_7d', 'item_rate_7d', 'item_cnt_30d', 'item_rate_30d', 'ui_cnt_1d', 'ui_rate_1d', 'ui_cnt_7d', 'ui_rate_7d', 'ui_cnt_30d', 'ui_rate_30d', 'gitem_cnt_1d', 'gitem_rate_1d', 'gitem_cnt_7d', 'gitem_rate_7d', 'gitem_cnt_30d', 'gitem_rate_30d', 'gitem_cnt_90d', 'gitem_rate_90d']
+110.2s	27	train: 1603087 | val: 711007
+153.2s	28	NDCG@10  случайный порядок                        0.6816
+153.2s	29	NDCG@10  популярность трека (gitem_rate_30d)      0.7064
+153.2s	30	NDCG@10  LightGBM, все ручные фичи                0.7681
+153.2s	31	
+153.2s	32	ui_rate_30d       0.319
+153.2s	33	gitem_rate_90d    0.120
+153.2s	34	ui_rate_7d        0.099
+153.2s	35	ui_cnt_30d        0.091
+153.2s	36	user_rate_30d     0.064
+153.2s	37	user_rate_7d      0.052
+153.2s	38	user_cnt_30d      0.041
+153.2s	39	item_rate_30d     0.033
+153.2s	40	ui_cnt_7d         0.027
+153.2s	41	gitem_cnt_90d     0.022
+153.2s	42	gitem_rate_30d    0.020
+153.2s	43	user_cnt_7d       0.020
+153.2s	44	gitem_cnt_30d     0.012
+153.2s	45	item_cnt_30d      0.011
+153.2s	46	user_rate_1d      0.011
+153.2s	47	gitem_rate_7d     0.008
+153.2s	48	gitem_cnt_7d      0.006
+153.2s	49	item_cnt_7d       0.006
+153.2s	50	item_rate_7d      0.006
+153.2s	51	ui_rate_1d        0.006
+153.2s	52	gitem_rate_1d     0.006
+153.2s	53	user_cnt_1d       0.005
+153.2s	54	item_cnt_1d       0.004
+153.2s	55	item_rate_1d      0.004
+153.2s	56	gitem_cnt_1d      0.004
+153.2s	57	ui_cnt_1d         0.003
+153.2s	58	dtype: float64
+238.8s	59	все                  NDCG@10 = 0.7681 ± 0.0000
+346.0s	60	без user_*           NDCG@10 = 0.7651 ± 0.0003
+431.9s	61	без item_/gitem_     NDCG@10 = 0.7583 ± 0.0003
+513.3s	62	без ui_*             NDCG@10 = 0.7286 ± 0.0002
+575.5s	63	только ui_*          NDCG@10 = 0.7563 ± 0.0002
+622.3s	64	74 фичей в пуле
+638.2s	65	    window_d  ui_rate  ui_cnt
+638.2s	66	0          1   0.7039  0.7028
+638.2s	67	1          2   0.7089  0.7094
+638.2s	68	2          3   0.7125  0.7123
+638.2s	69	3          5   0.7174  0.7165
+638.2s	70	4          7   0.7199  0.7192
+638.2s	71	5         10   0.7232  0.7210
+638.2s	72	6         14   0.7261  0.7235
+638.2s	73	7         21   0.7295  0.7268
+638.2s	74	8         30   0.7314  0.7288
+638.2s	75	9         45   0.7331  0.7294
+638.2s	76	10        60   0.7344  0.7280
+638.2s	77	11        90   0.7362  0.7264
+638.2s	78	12       120   0.7368  0.7247
+638.2s	79	13       180   0.7396  0.7241
+638.2s	80	14       400   0.7396  0.7221
+865.2s	81	NDCG@10  ручные (26 фичей):      0.7681
+865.2s	82	NDCG@10  пул (74 фичей):        0.7779
+865.2s	83	NDCG@10  топ-30 из пула по важности: 0.7764
+865.2s	84	ui_rate_400d      0.174
+865.2s	85	ui_rate_90d       0.079
+865.2s	86	ui_rate_180d      0.068
+865.2s	87	gitem_rate_90d    0.044
+865.2s	88	ui_cnt_60d        0.025
+865.2s	89	ui_rate_60d       0.021
+865.2s	90	ui_cnt_180d       0.021
+865.2s	91	ui_rate_120d      0.021
+865.2s	92	ui_rate_21d       0.020
+865.2s	93	gitem_rate_30d    0.019
+865.2s	94	ui_cnt_400d       0.018
+865.2s	95	ui_rate_45d       0.016
+865.2s	96	user_rate_60d     0.016
+865.2s	97	user_rate_30d     0.016
+865.2s	98	user_rate_400d    0.016
+865.2s	99	dtype: float64
+866.4s	100	пул минус ручные: ΔNDCG@10 = +0.0098, 95% ДИ [+0.0077, +0.0119]
+867.2s	101	топ-30 минус ручные: ΔNDCG@10 = +0.0083, 95% ДИ [+0.0064, +0.0105]
+867.5s	102	тест add_window_feats2 пройден
+869.7s	103	/kaggle/working/data/artist_item_mapping.parquet ['artist_id', 'item_id'] 9271906
+869.7s	104	   artist_id  item_id
+869.7s	105	0          1   953587
+869.7s	106	1          1  1921481
+869.7s	107	2          1  2659068
+869.7s	108	/kaggle/working/data/album_item_mapping.parquet ['album_id', 'item_id'] 9651644
+869.7s	109	   album_id  item_id
+869.7s	110	0         1  1491131
+869.7s	111	1         1  5109849
+869.7s	112	2         1  6735246
+870.7s	113	artist_id дубликатов item_id: 1400
+872.5s	114	artist_id треков без значения: 0.0002
+872.5s	115	artist_id уникальных: 55964
+873.6s	116	album_id дубликатов item_id: 997861
+875.6s	117	album_id треков без значения: 0.0
+875.6s	118	album_id уникальных: 154115
+906.0s	119	97 фичей в расширенном пуле
+1070.0s	120	NDCG@10  ручные (26):       0.7681
+1070.0s	121	NDCG@10  пул v1 (74):   0.7779
+1070.0s	122	NDCG@10  пул v2 (97):  0.7806
+1070.0s	123	NDCG@10  топ-30 из пула v2:       0.7768
+1071.0s	124	пул v2 - ручные: Δ = +0.0125, 95% ДИ [+0.0102, +0.0148]
+1072.0s	125	топ-30 v2 - ручные: Δ = +0.0087, 95% ДИ [+0.0064, +0.0110]
+1072.8s	126	пул v2 - пул v1: Δ = +0.0027, 95% ДИ [+0.0014, +0.0041]
+1072.8s	127	ui_rate           0.251
+1072.8s	128	ui_mean_pr        0.180
+1072.8s	129	user_rate         0.164
+1072.8s	130	ui_cnt            0.109
+1072.8s	131	gitem_rate        0.077
+1072.8s	132	user_cnt          0.071
+1072.8s	133	uart_rate         0.036
+1072.8s	134	gitem_cnt         0.024
+1072.8s	135	uart_cnt          0.018
+1072.8s	136	ualb_rate         0.017
+1072.8s	137	item_cnt          0.013
+1072.8s	138	item_rate         0.013
+1072.8s	139	ualb_cnt          0.013
+1072.8s	140	ualb_recency_d    0.005
+1072.8s	141	uart_recency_d    0.004
+1072.8s	142	dtype: float64
+1073.0s	143	48 признаков в M2
+1142.0s	144	NDCG@10 M2 (48): 0.7772
+1143.0s	145	M2 - M1: Δ = +0.0091, 95% ДИ [+0.0071, +0.0112]
+1144.0s	146	пул v2 - M2: Δ = +0.0034, 95% ДИ [+0.0021, +0.0047]
+1145.0s	147	топ-30 v2 - M2: Δ = -0.0004, 95% ДИ [-0.0018, +0.0011]
+1248.3s	148	без ui_mean_pr   (93) NDCG@10=0.7788; Δ к пулу v2 = -0.0018 [-0.0029; -0.0007]
+1365.1s	149	без uart/ualb    (79) NDCG@10=0.7790; Δ к пулу v2 = -0.0016 [-0.0028; -0.0004]
+1495.5s	150	без recency      (94) NDCG@10=0.7801; Δ к пулу v2 = -0.0005 [-0.0014; +0.0005]
+1495.7s	151	{'M1': 26, 'M2': 48, 'POOL2': 97}
+1568.2s	152	A1 K=26: NDCG@10=0.7767; Δ к M1 = +0.0086 [+0.0062; +0.0111]
+1660.2s	153	A1 K=48: NDCG@10=0.7802; Δ к M2 = +0.0030 [+0.0017; +0.0043]
+1661.8s	154	групп sel/rep: 8039 8213 | пересечение пользователей: 0
+1664.8s	155	rep: случайный 0.6950 | популярность 0.7226
+1666.8s	156	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1666.8s	157	  _log_warning("Overriding the parameters from Reference Dataset.")
+1666.8s	158	
+1666.8s	159	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1666.8s	160	  _log_warning("Overriding the parameters from Reference Dataset.")
+1711.9s	161	M1     (26): NDCG@10  sel=0.7555  rep=0.7792
+1715.6s	162	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1715.6s	163	  _log_warning("Overriding the parameters from Reference Dataset.")
+1715.6s	164	
+1715.6s	165	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1715.6s	166	  _log_warning("Overriding the parameters from Reference Dataset.")
+1770.9s	167	M2     (48): NDCG@10  sel=0.7666  rep=0.7860
+1778.3s	168	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1778.3s	169	  _log_warning("Overriding the parameters from Reference Dataset.")
+1778.3s	170	
+1778.3s	171	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1778.3s	172	  _log_warning("Overriding the parameters from Reference Dataset.")
+1876.2s	173	POOL2  (97): NDCG@10  sel=0.7703  rep=0.7894
+1878.0s	174	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1878.0s	175	  _log_warning("Overriding the parameters from Reference Dataset.")
+1878.0s	176	
+1878.0s	177	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1878.0s	178	  _log_warning("Overriding the parameters from Reference Dataset.")
+1930.0s	179	A1 K=26: sel=0.7664 rep=0.7861; Δ(rep) к M1 = +0.0069 [+0.0039; +0.0098]
+1933.7s	180	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1933.7s	181	  _log_warning("Overriding the parameters from Reference Dataset.")
+1933.7s	182	
+1933.7s	183	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+1933.7s	184	  _log_warning("Overriding the parameters from Reference Dataset.")
+2011.4s	185	A1 K=48: sel=0.7703 rep=0.7885; Δ(rep) к M2 = +0.0025 [+0.0005; +0.0043]
+2011.9s	186	M2 - M1: Δ(rep) = +0.0069 [+0.0041; +0.0093]
+2012.2s	187	POOL2 - M2: Δ(rep) = +0.0034 [+0.0016; +0.0053]
+2013.2s	188	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2013.2s	189	  _log_warning("Overriding the parameters from Reference Dataset.")
+2013.2s	190	
+2013.2s	191	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2013.2s	192	  _log_warning("Overriding the parameters from Reference Dataset.")
+2050.7s	193	10 0.7635 0.7834
+2051.8s	194	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2051.8s	195	  _log_warning("Overriding the parameters from Reference Dataset.")
+2051.8s	196	
+2051.8s	197	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2051.8s	198	  _log_warning("Overriding the parameters from Reference Dataset.")
+2094.8s	199	15 0.7653 0.785
+2096.3s	200	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2096.3s	201	  _log_warning("Overriding the parameters from Reference Dataset.")
+2096.3s	202	
+2096.3s	203	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2096.3s	204	  _log_warning("Overriding the parameters from Reference Dataset.")
+2131.1s	205	20 0.7661 0.7867
+2133.0s	206	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2133.0s	207	  _log_warning("Overriding the parameters from Reference Dataset.")
+2133.0s	208	
+2133.0s	209	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2133.0s	210	  _log_warning("Overriding the parameters from Reference Dataset.")
+2184.3s	211	26 0.7664 0.7861
+2186.4s	212	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2186.4s	213	  _log_warning("Overriding the parameters from Reference Dataset.")
+2186.4s	214	
+2186.4s	215	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2186.4s	216	  _log_warning("Overriding the parameters from Reference Dataset.")
+2234.5s	217	30 0.7676 0.7868
+2237.5s	218	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2237.5s	219	  _log_warning("Overriding the parameters from Reference Dataset.")
+2237.5s	220	
+2237.5s	221	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2237.5s	222	  _log_warning("Overriding the parameters from Reference Dataset.")
+2288.0s	223	40 0.7687 0.7877
+2291.6s	224	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2291.6s	225	  _log_warning("Overriding the parameters from Reference Dataset.")
+2291.6s	226	
+2291.6s	227	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2291.6s	228	  _log_warning("Overriding the parameters from Reference Dataset.")
+2362.7s	229	48 0.7703 0.7885
+2367.4s	230	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2367.4s	231	  _log_warning("Overriding the parameters from Reference Dataset.")
+2367.4s	232	
+2367.4s	233	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2367.4s	234	  _log_warning("Overriding the parameters from Reference Dataset.")
+2446.8s	235	60 0.77 0.7885
+2452.9s	236	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2452.9s	237	  _log_warning("Overriding the parameters from Reference Dataset.")
+2452.9s	238	
+2452.9s	239	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2452.9s	240	  _log_warning("Overriding the parameters from Reference Dataset.")
+2561.7s	241	75 0.7703 0.7891
+2569.5s	242	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2569.5s	243	  _log_warning("Overriding the parameters from Reference Dataset.")
+2569.5s	244	
+2569.5s	245	/usr/local/lib/python3.13/dist-packages/lightgbm/basic.py:2535: UserWarning: Overriding the parameters from Reference Dataset.
+2569.5s	246	  _log_warning("Overriding the parameters from Reference Dataset.")
+2719.0s	247	97 0.7708 0.7898
+2719.7s	248	sel: случайный порядок 0.6674
+3503.3s	249	RFE готов за 784 с
+3544.7s	250	  K=  1 + ui_rate_400d         sel(proxy)=0.7445
+3587.5s	251	  K=  2 + ui_cnt_90d           sel(proxy)=0.7504
+3630.4s	252	  K=  3 + gitem_rate_90d       sel(proxy)=0.7535
+3675.6s	253	  K=  4 + ui_mean_pr_90d       sel(proxy)=0.7569
+3720.6s	254	  K=  5 + user_rate_60d        sel(proxy)=0.7595
+3766.6s	255	  K=  6 + uart_rate_400d       sel(proxy)=0.7609
+3813.9s	256	  K=  7 + ui_rate_21d          sel(proxy)=0.7620
+3861.5s	257	  K=  8 + gitem_rate_30d       sel(proxy)=0.7628
+3909.9s	258	  K=  9 + gitem_rate_1d        sel(proxy)=0.7631
+3959.0s	259	  K= 10 + ui_cnt_120d          sel(proxy)=0.7638
+4008.9s	260	  K= 11 + uart_rate_7d         sel(proxy)=0.7627
+4060.1s	261	  K= 12 + gitem_rate_7d        sel(proxy)=0.7638
+4112.1s	262	  K= 13 + user_rate_30d        sel(proxy)=0.7639
+4164.3s	263	  K= 14 + ui_mean_pr_400d      sel(proxy)=0.7645
+4216.8s	264	  K= 15 + user_rate_7d         sel(proxy)=0.7651
+4270.6s	265	  K= 16 + ui_cnt_400d          sel(proxy)=0.7642
+4325.3s	266	  K= 17 + ualb_rate_400d       sel(proxy)=0.7648
+4379.9s	267	  K= 18 + ui_rate_60d          sel(proxy)=0.7650
+4435.0s	268	  K= 19 + uart_cnt_400d        sel(proxy)=0.7658
+4490.6s	269	  K= 20 + item_rate_7d         sel(proxy)=0.7649
+4547.6s	270	  K= 21 + item_rate_30d        sel(proxy)=0.7651
+4605.5s	271	  K= 22 + ui_cnt_45d           sel(proxy)=0.7646
+4664.0s	272	  K= 23 + user_rate_400d       sel(proxy)=0.7645
+4723.5s	273	  K= 24 + ui_rate_10d          sel(proxy)=0.7650
+4783.1s	274	  K= 25 + ui_cnt_30d           sel(proxy)=0.7642
+4843.7s	275	  K= 26 + ui_cnt_60d           sel(proxy)=0.7651
+4904.5s	276	  K= 27 + user_rate_120d       sel(proxy)=0.7650
+4965.8s	277	  K= 28 + user_rate_2d         sel(proxy)=0.7646
+5027.9s	278	  K= 29 + ui_rate_180d         sel(proxy)=0.7648
+5090.5s	279	  K= 30 + user_rate_45d        sel(proxy)=0.7645
+5154.1s	280	  K= 31 + user_rate_14d        sel(proxy)=0.7643
+5218.7s	281	  K= 32 + user_rate_5d         sel(proxy)=0.7653
+5283.2s	282	  K= 33 + ui_mean_pr_30d       sel(proxy)=0.7647
+5348.6s	283	  K= 34 + ui_rate_120d         sel(proxy)=0.7643
+5414.4s	284	  K= 35 + user_rate_180d       sel(proxy)=0.7651
+5481.5s	285	  K= 36 + user_rate_10d        sel(proxy)=0.7647
+5549.0s	286	  K= 37 + ui_mean_pr_7d        sel(proxy)=0.7661
+5616.5s	287	  K= 38 + uart_rate_30d        sel(proxy)=0.7649
+5684.8s	288	  K= 39 + ui_rate_30d          sel(proxy)=0.7660
+5753.5s	289	  K= 40 + user_cnt_10d         sel(proxy)=0.7647
+5823.3s	290	  K= 41 + uart_cnt_30d         sel(proxy)=0.7661
+5893.3s	291	  K= 42 + user_rate_90d        sel(proxy)=0.7652
+5964.0s	292	  K= 43 + user_rate_1d         sel(proxy)=0.7652
+6035.4s	293	  K= 44 + ui_cnt_180d          sel(proxy)=0.7651
+6107.0s	294	  K= 45 + ualb_recency_d       sel(proxy)=0.7656
+6180.0s	295	  K= 46 + user_cnt_21d         sel(proxy)=0.7655
+6253.2s	296	  K= 47 + uart_rate_90d        sel(proxy)=0.7647
+6327.7s	297	  K= 48 + item_cnt_30d         sel(proxy)=0.7652
+6327.7s	298	жадный отбор готов за 47.1 мин
+6719.6s	299	 K  метод    sel    rep ref  d_ref  ci_lo  ci_hi  d_vs_A1   a1_lo  a1_hi
+6719.6s	300	26     A1 0.7664 0.7861  M1 0.0069 0.0039 0.0098      NaN     NaN    NaN
+6719.6s	301	26    RFE 0.7678 0.7875  M1 0.0084 0.0055 0.0111   0.0015  0.0001 0.0028
+6719.6s	302	26 Greedy 0.7692 0.7866  M1 0.0074 0.0045 0.0102   0.0005 -0.0013 0.0021
+6719.6s	303	48     A1 0.7703 0.7885  M2 0.0025 0.0005 0.0043      NaN     NaN    NaN
+6719.6s	304	48    RFE 0.7698 0.7888  M2 0.0028 0.0010 0.0046   0.0003 -0.0011 0.0016
+6719.6s	305	48 Greedy 0.7686 0.7880  M2 0.0020 0.0002 0.0037  -0.0006 -0.0020 0.0008
+6766.4s	306	M1 0 0.7555 0.7792
+6826.6s	307	M1 1 0.7574 0.7808
+6873.8s	308	M1 2 0.7564 0.7801
+6909.7s	309	M1 3 0.7555 0.7799
+6950.8s	310	M1 4 0.7568 0.7804
+7009.2s	311	M2 0 0.7666 0.786
+7077.9s	312	M2 1 0.7668 0.7865
+7139.7s	313	M2 2 0.7663 0.7862
+7212.8s	314	M2 3 0.7678 0.7866
+7274.4s	315	M2 4 0.7668 0.7866
+7310.8s	316	RFE_26 0 0.7678 0.7875
+7365.3s	317	RFE_26 1 0.7686 0.788
+7413.0s	318	RFE_26 2 0.769 0.7885
+7465.7s	319	RFE_26 3 0.7693 0.788
+7518.4s	320	RFE_26 4 0.7688 0.788
+7605.6s	321	RFE_48 0 0.7698 0.7888
+7676.5s	322	RFE_48 1 0.7695 0.7884
+7774.0s	323	RFE_48 2 0.7701 0.7893
+7850.0s	324	RFE_48 3 0.7701 0.7886
+7909.1s	325	RFE_48 4 0.7702 0.7894
+8015.0s	326	POOL2 0 0.7703 0.7894
+8111.7s	327	POOL2 1 0.7702 0.7896
+8236.3s	328	POOL2 2 0.7713 0.7902
+8342.5s	329	POOL2 3 0.7702 0.7893
+8496.2s	330	POOL2 4 0.7708 0.7902
+8496.2s	331	           sel             rep        
+8496.2s	332	          mean     std    mean     std
+8496.2s	333	набор                                 
+8496.2s	334	M1      0.7563  0.0008  0.7801  0.0006
+8496.2s	335	M2      0.7669  0.0005  0.7864  0.0003
+8496.2s	336	POOL2   0.7705  0.0005  0.7897  0.0004
+8496.2s	337	RFE_26  0.7687  0.0006  0.7880  0.0003
+8496.2s	338	RFE_48  0.7699  0.0003  0.7889  0.0004
+9407.0s	339	M1 лучший sel = 0.7565 {'learning_rate': 0.043229742684280835, 'num_leaves': 153, 'min_data_in_leaf': 86, 'feature_fraction': 0.8493895254585981, 'bagging_fraction': 0.6848659438476902, 'lambda_l2': 0.16102341784087215}
+10676.1s	340	M2 лучший sel = 0.7677 {'learning_rate': 0.05349443115641768, 'num_leaves': 127, 'min_data_in_leaf': 91, 'feature_fraction': 0.860480127226932, 'bagging_fraction': 0.6466366547467016, 'lambda_l2': 0.022411614040189654}
+11711.3s	341	RFE_26 лучший sel = 0.7696 {'learning_rate': 0.059461798063664806, 'num_leaves': 169, 'min_data_in_leaf': 906, 'feature_fraction': 0.7037402316237519, 'bagging_fraction': 0.7450260219762848, 'lambda_l2': 3.8665512469935344}
+13157.8s	342	RFE_48 лучший sel = 0.7706 {'learning_rate': 0.036752560313795375, 'num_leaves': 37, 'min_data_in_leaf': 155, 'feature_fraction': 0.6305450253309061, 'bagging_fraction': 0.9447469330952984, 'lambda_l2': 0.005105443738509219}
+14086.8s	343	           sel             rep        
+14086.8s	344	          mean     std    mean     std
+14086.8s	345	набор                                 
+14086.8s	346	M1      0.7562  0.0007  0.7798  0.0004
+14086.8s	347	M2      0.7672  0.0010  0.7861  0.0011
+14086.8s	348	RFE_26  0.7687  0.0008  0.7869  0.0002
+14086.8s	349	RFE_48  0.7705  0.0003  0.7893  0.0002
+14087.3s	350	M2 - M1: Δ(rep) = +0.0071 [+0.0045; +0.0098]
+14087.8s	351	RFE_26 - M1: Δ(rep) = +0.0076 [+0.0046; +0.0105]
+14088.1s	352	RFE_48 - M2: Δ(rep) = +0.0028 [+0.0007; +0.0048]
+14103.2s	353	прокси на M1: 0.7516 ± 0.0008; порог принятия Δ > 0.0015
+14165.3s	354	  раунд 1: лучший ualb_skip_rate_271d Δ=+0.0060 (принят); принято 1
+14229.8s	355	  раунд 2: лучший ui_full_rate_49d Δ=+0.0014; принято 1
+14292.5s	356	  раунд 3: лучший ui_mean_pr_206d Δ=+0.0025 (принят); принято 2
+14356.3s	357	  раунд 4: лучший alb_rate_56d Δ=+0.0014; принято 2
+14422.3s	358	  раунд 5: лучший ui_skip_rate_110d Δ=+0.0025 (принят); принято 3
+14488.3s	359	  раунд 6: лучший ui_cnt_339d Δ=+0.0010; принято 3
+14551.5s	360	  раунд 7: лучший alb_full_rate_1d Δ=-0.0016; принято 3
+14616.0s	361	  раунд 8: лучший uart_full_rate_42d Δ=-0.0001; принято 3
+14680.7s	362	  раунд 9: лучший ualb_full_rate_6d Δ=-0.0014; принято 3
+14744.7s	363	  раунд 10: лучший ualb_mean_pr_388d Δ=-0.0018; принято 3
+14802.1s	364	  раунд 1: лучший ualb_skip_rate_271d Δ=+0.0060 (принят); принято 1
+14866.5s	365	  раунд 2: лучший ui_full_rate_49d Δ=+0.0014; принято 1
+14926.8s	366	  раунд 3: лучший ui_full_rate_98d Δ=+0.0021 (принят); принято 2
+14992.7s	367	  раунд 4: лучший user_mean_pr_93d Δ=+0.0008; принято 2
+15058.3s	368	  раунд 5: лучший uart_skip_rate_55d Δ=+0.0015 (принят); принято 3
+15121.9s	369	  раунд 6: лучший item_full_rate_54d Δ=-0.0003; принято 3
+15188.7s	370	  раунд 7: лучший ualb_skip_rate_27d Δ=-0.0003; принято 3
+15255.2s	371	  раунд 8: лучший ualb_cnt_271d Δ=+0.0015; принято 3
+15316.9s	372	  раунд 9: лучший ui_mean_pr_271d Δ=+0.0004; принято 3
+15381.1s	373	  раунд 10: лучший ualb_cnt_136d Δ=+0.0002; принято 3
+15505.7s	374	 метод  принято  оценок  сек    rep   d_M1     lo     hi
+15505.7s	375	random        3      80  641 0.7870 0.0078 0.0056 0.0101
+15505.7s	376	   evo        3      80  636 0.7853 0.0062 0.0042 0.0082
+15506.8s	377	random seed 0
+15565.1s	378	  раунд 1: лучший ualb_skip_rate_271d Δ=+0.0060 (принят); принято 1
+15629.8s	379	  раунд 2: лучший ui_full_rate_49d Δ=+0.0014; принято 1
+15689.3s	380	  раунд 3: лучший ui_mean_pr_206d Δ=+0.0025 (принят); принято 2
+15753.0s	381	  раунд 4: лучший alb_rate_56d Δ=+0.0014; принято 2
+15815.3s	382	  раунд 5: лучший ui_skip_rate_110d Δ=+0.0025 (принят); принято 3
+15881.9s	383	  раунд 6: лучший ui_cnt_339d Δ=+0.0010; принято 3
+15946.7s	384	  раунд 7: лучший alb_full_rate_1d Δ=-0.0016; принято 3
+16012.0s	385	  раунд 8: лучший uart_full_rate_42d Δ=-0.0001; принято 3
+16076.5s	386	  раунд 9: лучший ualb_full_rate_6d Δ=-0.0014; принято 3
+16140.9s	387	  раунд 10: лучший ualb_mean_pr_388d Δ=-0.0018; принято 3
+16140.9s	388	random seed 1
+16204.5s	389	  раунд 1: лучший uart_skip_rate_297d Δ=+0.0046 (принят); принято 1
+16266.6s	390	  раунд 2: лучший uart_mean_pr_356d Δ=+0.0024 (принят); принято 2
+16331.4s	391	  раунд 3: лучший ui_skip_rate_243d Δ=+0.0022 (принят); принято 3
+16396.6s	392	  раунд 4: лучший item_recency_d Δ=+0.0006; принято 3
+16460.9s	393	  раунд 5: лучший ualb_full_rate_3d Δ=+0.0009; принято 3
+16525.3s	394	  раунд 6: лучший user_full_rate_2d Δ=+0.0010; принято 3
+16591.9s	395	  раунд 7: лучший alb_skip_rate_3d Δ=+0.0013; принято 3
+16658.5s	396	  раунд 8: лучший uart_cnt_18d Δ=+0.0009; принято 3
+16722.5s	397	  раунд 9: лучший alb_rate_154d Δ=+0.0001; принято 3
+16788.1s	398	  раунд 10: лучший user_skip_rate_63d Δ=+0.0022 (принят); принято 4
+16788.1s	399	random seed 2
+16849.8s	400	  раунд 1: лучший uart_rate_51d Δ=+0.0038 (принят); принято 1
+16909.5s	401	  раунд 2: лучший alb_rate_254d Δ=+0.0005; принято 1
+16965.9s	402	  раунд 3: лучший uart_full_rate_162d Δ=+0.0019 (принят); принято 2
+17028.3s	403	  раунд 4: лучший uart_mean_pr_341d Δ=+0.0013; принято 2
+17090.9s	404	  раунд 5: лучший ualb_skip_rate_274d Δ=+0.0018 (принят); принято 3
+17155.6s	405	  раунд 6: лучший user_mean_pr_54d Δ=+0.0019 (принят); принято 4
+17220.4s	406	  раунд 7: лучший user_skip_rate_10d Δ=+0.0003; принято 4
+17284.6s	407	  раунд 8: лучший uart_cnt_329d Δ=+0.0002; принято 4
+17351.3s	408	  раунд 9: лучший ui_skip_rate_315d Δ=+0.0003; принято 4
+17414.1s	409	  раунд 10: лучший item_full_rate_197d Δ=+0.0004; принято 4
+17414.1s	410	evo seed 0
+17470.7s	411	  раунд 1: лучший ualb_skip_rate_271d Δ=+0.0060 (принят); принято 1
+17535.0s	412	  раунд 2: лучший ui_full_rate_49d Δ=+0.0014; принято 1
+17594.3s	413	  раунд 3: лучший ui_full_rate_98d Δ=+0.0021 (принят); принято 2
+17659.5s	414	  раунд 4: лучший user_mean_pr_93d Δ=+0.0008; принято 2
+17721.2s	415	  раунд 5: лучший uart_skip_rate_55d Δ=+0.0015 (принят); принято 3
+17785.0s	416	  раунд 6: лучший item_full_rate_54d Δ=-0.0003; принято 3
+17852.5s	417	  раунд 7: лучший ualb_skip_rate_27d Δ=-0.0003; принято 3
+17919.2s	418	  раунд 8: лучший ualb_cnt_271d Δ=+0.0015; принято 3
+17980.5s	419	  раунд 9: лучший ui_mean_pr_271d Δ=+0.0004; принято 3
+18044.8s	420	  раунд 10: лучший ualb_cnt_136d Δ=+0.0002; принято 3
+18044.8s	421	evo seed 1
+18104.1s	422	  раунд 1: лучший uart_skip_rate_297d Δ=+0.0046 (принят); принято 1
+18167.2s	423	  раунд 2: лучший uart_skip_rate_400d Δ=+0.0018 (принят); принято 2
+18231.9s	424	  раунд 3: лучший user_full_rate_111d Δ=-0.0014; принято 2
+18294.2s	425	  раунд 4: лучший ui_skip_rate_400d Δ=+0.0013; принято 2
+18357.0s	426	  раунд 5: лучший user_full_rate_7d Δ=-0.0012; принято 2
+18419.8s	427	  раунд 6: лучший ui_rate_400d Δ=+0.0018 (принят); принято 3
+18487.1s	428	  раунд 7: лучший art_rate_88d Δ=+0.0016 (принят); принято 4
+18551.3s	429	  раунд 8: лучший ui_skip_rate_103d Δ=-0.0003; принято 4
+18618.5s	430	  раунд 9: лучший alb_cnt_2d Δ=-0.0001; принято 4
+18683.3s	431	  раунд 10: лучший user_rate_280d Δ=+0.0006; принято 4
+18683.3s	432	evo seed 2
+18741.3s	433	  раунд 1: лучший uart_rate_51d Δ=+0.0038 (принят); принято 1
+18800.2s	434	  раунд 2: лучший uart_full_rate_162d Δ=+0.0019 (принят); принято 2
+18865.2s	435	  раунд 3: лучший uart_recency_d Δ=+0.0015; принято 2
+18931.1s	436	  раунд 4: лучший ui_full_rate_227d Δ=+0.0028 (принят); принято 3
+18997.8s	437	  раунд 5: лучший ui_skip_rate_329d Δ=+0.0015; принято 3
+19062.6s	438	  раунд 6: лучший uart_skip_rate_22d Δ=+0.0015; принято 3
+19125.4s	439	  раунд 7: лучший alb_full_rate_1d Δ=+0.0004; принято 3
+19190.5s	440	  раунд 8: лучший alb_cnt_1d Δ=+0.0016 (принят); принято 4
+19252.1s	441	  раунд 9: лучший item_mean_pr_4d Δ=-0.0004; принято 4
+19315.5s	442	  раунд 10: лучший uart_cnt_15d Δ=-0.0011; принято 4
+19315.5s	443	surrogate seed 0
+19371.6s	444	  раунд 1: лучший ualb_skip_rate_271d Δ=+0.0060 (принят); принято 1
+19435.1s	445	  раунд 2: лучший ui_full_rate_49d Δ=+0.0014; принято 1
+19490.9s	446	  раунд 3: лучший uart_skip_rate_351d Δ=+0.0009; принято 1
+19555.2s	447	  раунд 4: лучший ui_mean_pr_266d Δ=+0.0034 (принят); принято 2
+19619.2s	448	  раунд 5: лучший ualb_cnt_278d Δ=+0.0030 (принят); принято 3
+19681.8s	449	  раунд 6: лучший ui_cnt_283d Δ=+0.0013; принято 3
+19744.4s	450	  раунд 7: лучший uart_skip_rate_1d Δ=+0.0001; принято 3
+19806.7s	451	  раунд 8: лучший user_mean_pr_394d Δ=-0.0004; принято 3
+19869.0s	452	  раунд 9: лучший ui_cnt_278d Δ=+0.0013; принято 3
+19929.8s	453	  раунд 10: лучший uart_full_rate_49d Δ=+0.0001; принято 3
+19929.8s	454	surrogate seed 1
+19988.5s	455	  раунд 1: лучший uart_skip_rate_297d Δ=+0.0046 (принят); принято 1
+20046.2s	456	  раунд 2: лучший uart_mean_pr_356d Δ=+0.0024 (принят); принято 2
+20102.2s	457	  раунд 3: лучший uart_cnt_342d Δ=+0.0008; принято 2
+20165.6s	458	  раунд 4: лучший ui_mean_pr_302d Δ=+0.0038 (принят); принято 3
+20218.3s	459	  раунд 5: лучший ui_cnt_301d Δ=+0.0018 (принят); принято 4
+20284.3s	460	  раунд 6: лучший uart_rate_298d Δ=+0.0014; принято 4
+20348.8s	461	  раунд 7: лучший ui_rate_389d Δ=+0.0014; принято 4
+20412.6s	462	  раунд 8: лучший ui_rate_366d Δ=+0.0014; принято 4
+20475.5s	463	  раунд 9: лучший alb_full_rate_60d Δ=+0.0024 (принят); принято 5
+20541.0s	464	  раунд 10: лучший alb_full_rate_21d Δ=-0.0007; принято 5
+20541.0s	465	surrogate seed 2
+20598.7s	466	  раунд 1: лучший uart_rate_51d Δ=+0.0038 (принят); принято 1
+20657.6s	467	  раунд 2: лучший alb_rate_254d Δ=+0.0005; принято 1
+20718.7s	468	  раунд 3: лучший ui_skip_rate_82d Δ=+0.0023 (принят); принято 2
+20782.6s	469	  раунд 4: лучший ui_rate_90d Δ=+0.0015; принято 2
+20834.4s	470	  раунд 5: лучший ui_skip_rate_197d Δ=+0.0019 (принят); принято 3
+20886.4s	471	  раунд 6: лучший alb_rate_13d Δ=-0.0006; принято 3
+20946.9s	472	  раунд 7: лучший ui_cnt_220d Δ=+0.0021 (принят); принято 4
+21007.1s	473	  раунд 8: лучший ui_mean_pr_79d Δ=+0.0020 (принят); принято 5
+21072.2s	474	  раунд 9: лучший ui_full_rate_79d Δ=+0.0001; принято 5
+21132.9s	475	  раунд 10: лучший ui_skip_rate_191d Δ=+0.0008; принято 5
+21676.3s	476	    метод  seed  принято  оценок_до_первого    rep   d_M1  сек
+21676.3s	477	   random     0        3                  3 0.7870 0.0078  634
+21676.3s	478	   random     1        4                  1 0.7870 0.0079  647
+21676.3s	479	   random     2        4                  3 0.7846 0.0055  626
+21676.3s	480	      evo     0        3                  3 0.7853 0.0062  631
+21676.3s	481	      evo     1        4                  1 0.7879 0.0087  638
+21676.3s	482	      evo     2        4                  3 0.7854 0.0062  632
+21676.3s	483	surrogate     0        3                  3 0.7865 0.0073  614
+21676.3s	484	surrogate     1        5                  1 0.7884 0.0093  611
+21676.3s	485	surrogate     2        5                  3 0.7866 0.0074  592
+21676.3s	486	          принято             rep            d_M1        
+21676.3s	487	             mean     std    mean     std    mean     std
+21676.3s	488	метод                                                    
+21676.3s	489	evo        3.6667  0.5774  0.7862  0.0015  0.0070  0.0015
+21676.3s	490	random     3.6667  0.5774  0.7862  0.0014  0.0071  0.0014
+21676.3s	491	surrogate  4.3333  1.1547  0.7872  0.0011  0.0080  0.0011
+21676.8s	492	27 принятых признаков: ['alb_cnt_1d', 'alb_full_rate_60d', 'art_rate_88d', 'ualb_cnt_278d', 'ualb_skip_rate_271d', 'ualb_skip_rate_274d', 'uart_full_rate_162d', 'uart_mean_pr_356d', 'uart_rate_51d', 'uart_skip_rate_297d', 'uart_skip_rate_400d', 'uart_skip_rate_55d', 'ui_cnt_220d', 'ui_cnt_301d', 'ui_full_rate_227d', 'ui_full_rate_98d', 'ui_mean_pr_206d', 'ui_mean_pr_266d', 'ui_mean_pr_302d', 'ui_mean_pr_79d', 'ui_rate_400d', 'ui_skip_rate_110d', 'ui_skip_rate_197d', 'ui_skip_rate_243d', 'ui_skip_rate_82d', 'user_mean_pr_54d', 'user_skip_rate_63d']
+21685.8s	493	123 признаков в пуле v3
+22556.0s	494	RFE на пуле v3: 870 с
+22641.4s	495	48 RFE v2 0.7698 0.7888
+22704.6s	496	48 RFE v3 0.7694 0.7888
+22705.0s	497	K=48: RFE v3 - RFE v2 = -0.0000 [-0.0014; +0.0014]
+22740.9s	498	26 RFE v2 0.7678 0.7875
+22798.4s	499	26 RFE v3 0.7686 0.7874
+22798.7s	500	K=26: RFE v3 - RFE v2 = -0.0001 [-0.0016; +0.0014]
+22798.7s	501	Данные 'multi' успешно загружены в память!
+22857.8s	502	  раунд 1: лучший ui_mean_pr_33d Δ=+0.0027 (принят); принято 1
+22918.3s	503	  раунд 2: лучший uart_mean_pr_1d Δ=+0.0019 (принят); принято 2
+22977.8s	504	  раунд 3: лучший ualb_skip_rate_265d Δ=+0.0020 (принят); принято 3
+23037.4s	505	  раунд 4: лучший art_rate_87d Δ=+0.0011; принято 3
+23100.1s	506	  раунд 5: лучший ui_mean_pr_162d Δ=+0.0022 (принят); принято 4
+23161.6s	507	  раунд 6: лучший art_full_rate_22d Δ=+0.0021 (принят); принято 5
+23225.7s	508	  раунд 7: лучший ui_skip_rate_249d Δ=+0.0003; принято 5
+23290.4s	509	  раунд 8: лучший art_full_rate_130d Δ=+0.0010; принято 5
+23351.1s	510	  раунд 9: лучший ualb_skip_rate_274d Δ=+0.0000; принято 5
+23414.0s	511	  раунд 10: лучший item_cnt_33d Δ=+0.0000; принято 5
+23474.5s	512	  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+23532.2s	513	  раунд 2: лучший ui_full_rate_283d Δ=+0.0029 (принят); принято 2
+23591.5s	514	  раунд 3: лучший user_full_rate_5d Δ=+0.0022 (принят); принято 3
+23650.8s	515	  раунд 4: лучший ualb_mean_pr_307d Δ=+0.0008; принято 3
+23713.0s	516	  раунд 5: лучший ui_skip_rate_68d Δ=+0.0007; принято 3
+23775.8s	517	  раунд 6: лучший uart_skip_rate_35d Δ=+0.0003; принято 3
+23838.2s	518	  раунд 7: лучший art_cnt_5d Δ=+0.0007; принято 3
+23899.6s	519	  раунд 8: лучший ui_cnt_278d Δ=+0.0008; принято 3
+23957.9s	520	  раунд 9: лучший uart_full_rate_43d Δ=+0.0005; принято 3
+24017.4s	521	  раунд 10: лучший art_cnt_57d Δ=+0.0005; принято 3
+24073.7s	522	  раунд 1: лучший ualb_full_rate_126d Δ=+0.0049 (принят); принято 1
+24133.5s	523	  раунд 2: лучший ui_rate_213d Δ=+0.0039 (принят); принято 2
+24194.6s	524	  раунд 3: лучший user_skip_rate_13d Δ=+0.0007; принято 2
+24256.9s	525	  раунд 4: лучший uart_mean_pr_298d Δ=+0.0016 (принят); принято 3
+24311.4s	526	  раунд 5: лучший item_mean_pr_119d Δ=-0.0003; принято 3
+24372.3s	527	  раунд 6: лучший ui_skip_rate_270d Δ=+0.0008; принято 3
+24434.3s	528	  раунд 7: лучший ui_mean_pr_54d Δ=+0.0007; принято 3
+24494.1s	529	  раунд 8: лучший item_skip_rate_202d Δ=-0.0004; принято 3
+24555.9s	530	  раунд 9: лучший uart_mean_pr_147d Δ=-0.0008; принято 3
+24616.2s	531	  раунд 10: лучший uart_full_rate_23d Δ=-0.0010; принято 3
+24674.3s	532	  раунд 1: лучший ualb_full_rate_110d Δ=+0.0057 (принят); принято 1
+24732.1s	533	  раунд 2: лучший ui_mean_pr_203d Δ=+0.0018 (принят); принято 2
+24791.8s	534	  раунд 3: лучший ui_cnt_179d Δ=+0.0045 (принят); принято 3
+24851.8s	535	  раунд 4: лучший alb_skip_rate_34d Δ=+0.0004; принято 3
+24911.2s	536	  раунд 5: лучший art_mean_pr_24d Δ=+0.0002; принято 3
+24975.0s	537	  раунд 6: лучший ui_skip_rate_328d Δ=+0.0003; принято 3
+25037.4s	538	  раунд 7: лучший user_rate_27d Δ=+0.0007; принято 3
+25098.7s	539	  раунд 8: лучший uart_rate_78d Δ=+0.0003; принято 3
+25161.4s	540	  раунд 9: лучший alb_full_rate_25d Δ=+0.0009; принято 3
+25220.7s	541	  раунд 10: лучший user_rate_45d Δ=+0.0009; принято 3
+25278.0s	542	  раунд 1: лучший alb_skip_rate_216d Δ=+0.0015; принято 0
+25338.3s	543	  раунд 2: лучший ualb_skip_rate_374d Δ=+0.0060 (принят); принято 1
+25400.0s	544	  раунд 3: лучший uart_rate_195d Δ=+0.0019 (принят); принято 2
+25462.7s	545	  раунд 4: лучший uart_skip_rate_45d Δ=+0.0008; принято 2
+25524.0s	546	  раунд 5: лучший user_mean_pr_1d Δ=+0.0012; принято 2
+25586.4s	547	  раунд 6: лучший ualb_cnt_190d Δ=+0.0020 (принят); принято 3
+25646.5s	548	  раунд 7: лучший alb_cnt_268d Δ=-0.0001; принято 3
+25706.9s	549	  раунд 8: лучший uart_full_rate_21d Δ=+0.0003; принято 3
+25769.5s	550	  раунд 9: лучший ui_mean_pr_251d Δ=+0.0021 (принят); принято 4
+25831.9s	551	  раунд 10: лучший art_rate_1d Δ=+0.0008; принято 4
+25889.7s	552	  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+25947.9s	553	  раунд 2: лучший uart_skip_rate_48d Δ=+0.0001; принято 1
+26004.9s	554	  раунд 3: лучший item_recency_d Δ=-0.0009; принято 1
+26063.2s	555	  раунд 4: лучший ualb_skip_rate_67d Δ=+0.0012; принято 1
+26122.2s	556	  раунд 5: лучший ui_mean_pr_328d Δ=+0.0051 (принят); принято 2
+26182.6s	557	  раунд 6: лучший item_mean_pr_44d Δ=+0.0007; принято 2
+26243.9s	558	  раунд 7: лучший user_full_rate_126d Δ=+0.0012; принято 2
+26301.5s	559	  раунд 8: лучший uart_full_rate_21d Δ=+0.0018 (принят); принято 3
+26360.7s	560	  раунд 9: лучший art_cnt_2d Δ=+0.0008; принято 3
+26421.2s	561	  раунд 10: лучший alb_recency_d Δ=+0.0005; принято 3
+26479.5s	562	  раунд 1: лучший ualb_full_rate_240d Δ=+0.0066 (принят); принято 1
+26532.2s	563	  раунд 2: лучший ualb_mean_pr_115d Δ=+0.0006; принято 1
+26590.8s	564	  раунд 3: лучший user_mean_pr_41d Δ=+0.0019 (принят); принято 2
+26648.9s	565	  раунд 4: лучший ualb_full_rate_1d Δ=-0.0005; принято 2
+26704.6s	566	  раунд 5: лучший ui_skip_rate_114d Δ=+0.0000; принято 2
+26765.1s	567	  раунд 6: лучший ualb_cnt_108d Δ=-0.0005; принято 2
+26821.1s	568	  раунд 7: лучший uart_mean_pr_348d Δ=+0.0010; принято 2
+26883.3s	569	  раунд 8: лучший uart_full_rate_9d Δ=-0.0008; принято 2
+26944.8s	570	  раунд 9: лучший uart_rate_62d Δ=-0.0007; принято 2
+27004.1s	571	  раунд 10: лучший ui_skip_rate_115d Δ=-0.0002; принято 2
+27059.2s	572	  раунд 1: лучший ui_mean_pr_33d Δ=+0.0027 (принят); принято 1
+27119.8s	573	  раунд 2: лучший ui_full_rate_3d Δ=+0.0014; принято 1
+27180.4s	574	  раунд 3: лучший uart_rate_163d Δ=+0.0047 (принят); принято 2
+27238.4s	575	  раунд 4: лучший user_rate_26d Δ=-0.0000; принято 2
+27300.3s	576	  раунд 5: лучший ui_full_rate_162d Δ=+0.0015 (принят); принято 3
+27363.5s	577	  раунд 6: лучший item_mean_pr_33d Δ=+0.0002; принято 3
+27425.0s	578	  раунд 7: лучший ualb_rate_55d Δ=-0.0000; принято 3
+27487.4s	579	  раунд 8: лучший user_cnt_26d Δ=+0.0009; принято 3
+27548.1s	580	  раунд 9: лучший ui_rate_184d Δ=+0.0005; принято 3
+27610.6s	581	  раунд 10: лучший uart_mean_pr_126d Δ=+0.0001; принято 3
+27669.7s	582	  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+27726.6s	583	  раунд 2: лучший uart_rate_15d Δ=-0.0003; принято 1
+27785.7s	584	  раунд 3: лучший ui_mean_pr_112d Δ=+0.0030 (принят); принято 2
+27846.1s	585	  раунд 4: лучший ui_mean_pr_56d Δ=+0.0011; принято 2
+27907.5s	586	  раунд 5: лучший ui_cnt_278d Δ=+0.0021 (принят); принято 3
+27969.9s	587	  раунд 6: лучший item_full_rate_334d Δ=+0.0027 (принят); принято 4
+28030.9s	588	  раунд 7: лучший ualb_cnt_33d Δ=-0.0005; принято 4
+28093.0s	589	  раунд 8: лучший uart_full_rate_384d Δ=+0.0018 (принят); принято 5
+28154.2s	590	  раунд 9: лучший item_rate_4d Δ=-0.0011; принято 5
+28214.0s	591	  раунд 10: лучший art_rate_1d Δ=-0.0010; принято 5
+28273.5s	592	  раунд 1: лучший ualb_full_rate_126d Δ=+0.0049 (принят); принято 1
+28331.4s	593	  раунд 2: лучший ui_rate_213d Δ=+0.0039 (принят); принято 2
+28390.3s	594	  раунд 3: лучший user_skip_rate_280d Δ=+0.0002; принято 2
+28449.4s	595	  раунд 4: лучший ui_cnt_48d Δ=+0.0007; принято 2
+28510.3s	596	  раунд 5: лучший uart_skip_rate_3d Δ=+0.0012; принято 2
+28571.3s	597	  раунд 6: лучший user_mean_pr_139d Δ=+0.0002; принято 2
+28632.5s	598	  раунд 7: лучший ualb_skip_rate_280d Δ=+0.0018 (принят); принято 3
+28692.9s	599	  раунд 8: лучший uart_mean_pr_3d Δ=+0.0004; принято 3
+28751.6s	600	  раунд 9: лучший alb_mean_pr_314d Δ=-0.0003; принято 3
+28812.3s	601	  раунд 10: лучший ui_rate_48d Δ=-0.0008; принято 3
+28869.9s	602	  раунд 1: лучший ualb_full_rate_110d Δ=+0.0057 (принят); принято 1
+28931.5s	603	  раунд 2: лучший ualb_skip_rate_163d Δ=+0.0020 (принят); принято 2
+28991.6s	604	  раунд 3: лучший ualb_cnt_326d Δ=+0.0016 (принят); принято 3
+29053.2s	605	  раунд 4: лучший ualb_mean_pr_3d Δ=+0.0009; принято 3
+29111.7s	606	  раунд 5: лучший ualb_mean_pr_6d Δ=+0.0007; принято 3
+29171.1s	607	  раунд 6: лучший uart_rate_4d Δ=+0.0011; принято 3
+29233.1s	608	  раунд 7: лучший ualb_cnt_228d Δ=+0.0008; принято 3
+29293.0s	609	  раунд 8: лучший art_full_rate_297d Δ=+0.0015; принято 3
+29354.1s	610	  раунд 9: лучший alb_full_rate_4d Δ=+0.0010; принято 3
+29416.0s	611	  раунд 10: лучший ui_full_rate_110d Δ=+0.0006; принято 3
+29472.4s	612	  раунд 1: лучший alb_skip_rate_216d Δ=+0.0015; принято 0
+29529.4s	613	  раунд 2: лучший uart_skip_rate_19d Δ=+0.0020 (принят); принято 1
+29585.7s	614	  раунд 3: лучший ualb_skip_rate_85d Δ=+0.0014; принято 1
+29643.0s	615	  раунд 4: лучший uart_rate_14d Δ=+0.0010; принято 1
+29698.5s	616	  раунд 5: лучший uart_skip_rate_38d Δ=+0.0008; принято 1
+29754.9s	617	  раунд 6: лучший uart_full_rate_21d Δ=+0.0015; принято 1
+29813.2s	618	  раунд 7: лучший ualb_full_rate_73d Δ=+0.0025 (принят); принято 2
+29871.5s	619	  раунд 8: лучший item_rate_31d Δ=+0.0024 (принят); принято 3
+29929.3s	620	  раунд 9: лучший ui_rate_175d Δ=+0.0014; принято 3
+29988.9s	621	  раунд 10: лучший ualb_full_rate_9d Δ=+0.0002; принято 3
+30045.6s	622	  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+30104.2s	623	  раунд 2: лучший ui_rate_370d Δ=+0.0053 (принят); принято 2
+30164.1s	624	  раунд 3: лучший uart_rate_14d Δ=+0.0011; принято 2
+30220.7s	625	  раунд 4: лучший art_mean_pr_257d Δ=+0.0011; принято 2
+30275.6s	626	  раунд 5: лучший art_rate_130d Δ=+0.0006; принято 2
+30333.2s	627	  раунд 6: лучший uart_full_rate_12d Δ=+0.0014; принято 2
+30390.9s	628	  раунд 7: лучший art_recency_d Δ=+0.0014; принято 2
+30449.2s	629	  раунд 8: лучший ualb_full_rate_82d Δ=+0.0006; принято 2
+30506.8s	630	  раунд 9: лучший ualb_cnt_136d Δ=+0.0019 (принят); принято 3
+30567.9s	631	  раунд 10: лучший ualb_mean_pr_22d Δ=+0.0012; принято 3
+30622.6s	632	  раунд 1: лучший ualb_full_rate_240d Δ=+0.0066 (принят); принято 1
+30679.2s	633	  раунд 2: лучший ualb_cnt_202d Δ=+0.0023 (принят); принято 2
+30734.6s	634	  раунд 3: лучший uart_full_rate_400d Δ=+0.0006; принято 2
+30788.8s	635	  раунд 4: лучший ui_rate_80d Δ=+0.0012; принято 2
+30846.1s	636	  раунд 5: лучший ualb_cnt_151d Δ=+0.0006; принято 2
+30903.9s	637	  раунд 6: лучший ualb_cnt_288d Δ=+0.0005; принято 2
+30961.7s	638	  раунд 7: лучший ui_mean_pr_276d Δ=+0.0023 (принят); принято 3
+31021.7s	639	  раунд 8: лучший ui_cnt_132d Δ=+0.0005; принято 3
+31080.2s	640	  раунд 9: лучший user_rate_8d Δ=+0.0008; принято 3
+31136.4s	641	  раунд 10: лучший ualb_skip_rate_11d Δ=+0.0012; принято 3
+31190.1s	642	  раунд 1: лучший ui_mean_pr_33d Δ=+0.0027 (принят); принято 1
+31248.5s	643	  раунд 2: лучший uart_mean_pr_1d Δ=+0.0019 (принят); принято 2
+31300.2s	644	  раунд 3: лучший uart_mean_pr_81d Δ=+0.0008; принято 2
+31359.7s	645	  раунд 4: лучший art_mean_pr_20d Δ=-0.0008; принято 2
+31419.6s	646	  раунд 5: лучший ui_recency_d Δ=-0.0005; принято 2
+31476.3s	647	  раунд 6: лучший uart_skip_rate_77d Δ=+0.0016 (принят); принято 3
+31530.1s	648	  раунд 7: лучший uart_cnt_121d Δ=+0.0010; принято 3
+31591.5s	649	  раунд 8: лучший ui_full_rate_73d Δ=+0.0013; принято 3
+31645.5s	650	  раунд 9: лучший ui_rate_73d Δ=+0.0023 (принят); принято 4
+31706.0s	651	  раунд 10: лучший ui_full_rate_153d Δ=+0.0002; принято 4
+31764.0s	652	  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+31817.3s	653	  раунд 2: лучший ui_full_rate_283d Δ=+0.0029 (принят); принято 2
+31866.1s	654	  раунд 3: лучший ui_full_rate_18d Δ=+0.0023 (принят); принято 3
+31917.9s	655	  раунд 4: лучший ualb_cnt_9d Δ=+0.0000; принято 3
+31969.7s	656	  раунд 5: лучший ui_skip_rate_14d Δ=+0.0006; принято 3
+32025.3s	657	  раунд 6: лучший alb_full_rate_31d Δ=+0.0008; принято 3
+32082.0s	658	  раунд 7: лучший alb_full_rate_17d Δ=-0.0004; принято 3
+32141.6s	659	  раунд 8: лучший ualb_skip_rate_2d Δ=+0.0007; принято 3
+32196.9s	660	  раунд 9: лучший uart_full_rate_300d Δ=+0.0016 (принят); принято 4
+32258.0s	661	  раунд 10: лучший ui_cnt_303d Δ=+0.0015; принято 4
+32311.6s	662	  раунд 1: лучший ualb_full_rate_126d Δ=+0.0049 (принят); принято 1
+32368.1s	663	  раунд 2: лучший ui_rate_213d Δ=+0.0039 (принят); принято 2
+32423.5s	664	  раунд 3: лучший uart_full_rate_60d Δ=+0.0005; принято 2
+32477.3s	665	  раунд 4: лучший ualb_cnt_197d Δ=+0.0023 (принят); принято 3
+32529.7s	666	  раунд 5: лучший item_full_rate_192d Δ=-0.0009; принято 3
+32583.9s	667	  раунд 6: лучший ualb_cnt_147d Δ=-0.0003; принято 3
+32640.2s	668	  раунд 7: лучший ualb_skip_rate_5d Δ=-0.0002; принято 3
+32696.2s	669	  раунд 8: лучший ui_mean_pr_205d Δ=-0.0000; принято 3
+32754.6s	670	  раунд 9: лучший ualb_cnt_122d Δ=-0.0001; принято 3
+32812.1s	671	  раунд 10: лучший ui_skip_rate_284d Δ=+0.0003; принято 3
+32868.9s	672	  раунд 1: лучший ualb_full_rate_110d Δ=+0.0057 (принят); принято 1
+32922.5s	673	  раунд 2: лучший ui_mean_pr_203d Δ=+0.0018 (принят); принято 2
+32973.8s	674	  раунд 3: лучший ualb_rate_142d Δ=+0.0021 (принят); принято 3
+33023.5s	675	  раунд 4: лучший ualb_skip_rate_122d Δ=-0.0004; принято 3
+33081.9s	676	  раунд 5: лучший ui_full_rate_96d Δ=+0.0004; принято 3
+33142.7s	677	  раунд 6: лучший ualb_full_rate_48d Δ=+0.0002; принято 3
+33198.6s	678	  раунд 7: лучший uart_mean_pr_1d Δ=-0.0001; принято 3
+33253.3s	679	  раунд 8: лучший ualb_cnt_94d Δ=+0.0012; принято 3
+33313.7s	680	  раунд 9: лучший ualb_cnt_166d Δ=+0.0010; принято 3
+33370.7s	681	  раунд 10: лучший ualb_mean_pr_41d Δ=+0.0005; принято 3
+33426.3s	682	  раунд 1: лучший alb_skip_rate_216d Δ=+0.0015; принято 0
+33482.3s	683	  раунд 2: лучший ualb_skip_rate_374d Δ=+0.0060 (принят); принято 1
+33536.9s	684	  раунд 3: лучший ualb_mean_pr_276d Δ=+0.0028 (принят); принято 2
+33590.6s	685	  раунд 4: лучший user_skip_rate_292d Δ=-0.0002; принято 2
+33648.4s	686	  раунд 5: лучший uart_full_rate_344d Δ=+0.0015; принято 2
+33704.3s	687	  раунд 6: лучший uart_full_rate_338d Δ=+0.0015; принято 2
+33762.8s	688	  раунд 7: лучший ualb_full_rate_288d Δ=+0.0005; принято 2
+33822.0s	689	  раунд 8: лучший item_mean_pr_260d Δ=+0.0005; принято 2
+33878.0s	690	  раунд 9: лучший ualb_cnt_390d Δ=+0.0010; принято 2
+33932.8s	691	  раунд 10: лучший uart_full_rate_270d Δ=+0.0015; принято 2
+33989.5s	692	  раунд 1: лучший ualb_recency_d Δ=+0.0032 (принят); принято 1
+34046.7s	693	  раунд 2: лучший uart_skip_rate_48d Δ=+0.0001; принято 1
+34094.7s	694	  раунд 3: лучший ualb_full_rate_25d Δ=-0.0003; принято 1
+34150.7s	695	  раунд 4: лучший ualb_cnt_192d Δ=-0.0007; принято 1
+34200.2s	696	  раунд 5: лучший alb_mean_pr_30d Δ=-0.0014; принято 1
+34252.0s	697	  раунд 6: лучший ui_rate_342d Δ=+0.0053 (принят); принято 2
+34305.5s	698	  раунд 7: лучший ui_full_rate_383d Δ=+0.0004; принято 2
+34359.8s	699	  раунд 8: лучший uart_rate_209d Δ=+0.0013; принято 2
+34412.8s	700	  раунд 9: лучший uart_rate_370d Δ=+0.0008; принято 2
+34471.0s	701	  раунд 10: лучший uart_full_rate_127d Δ=+0.0015 (принят); принято 3
+34525.8s	702	  раунд 1: лучший ualb_full_rate_240d Δ=+0.0066 (принят); принято 1
+34577.9s	703	  раунд 2: лучший ualb_mean_pr_115d Δ=+0.0006; принято 1
+34631.5s	704	  раунд 3: лучший ualb_rate_235d Δ=+0.0011; принято 1
+34683.9s	705	  раунд 4: лучший ualb_cnt_352d Δ=+0.0016 (принят); принято 2
+34742.5s	706	  раунд 5: лучший uart_full_rate_250d Δ=+0.0015; принято 2
+34794.1s	707	  раунд 6: лучший ualb_rate_258d Δ=+0.0012; принято 2
+34849.9s	708	  раунд 7: лучший ui_rate_230d Δ=+0.0027 (принят); принято 3
+34908.6s	709	  раунд 8: лучший ui_rate_111d Δ=+0.0011; принято 3
+34966.5s	710	  раунд 9: лучший ui_rate_147d Δ=+0.0017 (принят); принято 4
+35027.1s	711	  раунд 10: лучший user_rate_240d Δ=-0.0004; принято 4
+35027.3s	712	13.81 ГБ
+35029.6s	713	16578011 дослушанных прослушиваний до T0
+35034.8s	714	вложений треков: (126175, 16) | покрытие строк df: 0.873
+35058.9s	715	graph_taste_pos_30d      0.862
+35058.9s	716	graph_taste_pos_90d      0.864
+35058.9s	717	graph_taste_pos_400d     0.864
+35058.9s	718	graph_taste_neg_30d      0.860
+35058.9s	719	graph_taste_neg_90d      0.863
+35058.9s	720	graph_taste_neg_400d     0.864
+35058.9s	721	graph_taste_diff_30d     0.859
+35058.9s	722	graph_taste_diff_90d     0.862
+35058.9s	723	graph_taste_diff_400d    0.863
+35058.9s	724	dtype: float64
+35059.1s	725	graph_taste_pos_90d 0.7094
+35059.3s	726	graph_taste_neg_90d 0.6985
+35059.3s	727	graph_taste_diff_90d 0.7177
+35062.2s	728	Traceback (most recent call last):
+35062.2s	729	  File "<string>", line 1, in <module>
+35062.2s	730	    import sys;import papermill as pm;pm.execute_notebook("__notebook__.ipynb","__notebook__.ipynb",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)
+35062.2s	731	                                      ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+35062.2s	732	  File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 131, in execute_notebook
+35062.2s	733	    raise_for_execution_errors(nb, output_path)
+35062.2s	734	    ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+35062.2s	735	  File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+35062.2s	736	    raise error
+35062.2s	737	papermill.exceptions.PapermillExecutionError: 
+35062.2s	738	---------------------------------------------------------------------------
+35062.2s	739	Exception encountered at "In [39]":
+35062.2s	740	---------------------------------------------------------------------------
+35062.2s	741	NameError                                 Traceback (most recent call last)
+35062.2s	742	/tmp/ipykernel_16/1227766746.py in <cell line: 0>()
+35062.2s	743	     23 
+35062.2s	744	     24 for nm in TASTE.columns:
+35062.2s	745	---> 25     NEW[nm] = TASTE[nm].to_numpy(); KEEP.add(nm)
+35062.2s	746	     26 taste_names = list(TASTE.columns)
+35062.2s	747	     27 register_features(taste_names)
+35062.2s	748	
+35062.2s	749	NameError: name 'KEEP' is not defined
+35062.2s	750	
+35066.2s	751	/usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+35066.2s	752	  cells[i][c] = re.sub('\\\\\|', '|', cell)
+35066.5s	753	/usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+35066.5s	754	  text = re.sub(r'_', '\_', text) # Escape underscores in display text
+35067.5s	755	[NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+35067.8s	756	[NbConvertApp] Writing 338750 bytes to __notebook__.ipynb
+35071.2s	757	[NbConvertApp] Converting notebook __notebook__.ipynb to html
+35072.7s	758	[NbConvertApp] Support files will be in __results___files/
+35072.7s	759	[NbConvertApp] Making directory __results___files
+35072.7s	760	[NbConvertApp] Making directory __results___files
+35072.7s	761	[NbConvertApp] Making directory __results___files
+35072.7s	762	[NbConvertApp] Writing 771405 bytes to __results__.html
